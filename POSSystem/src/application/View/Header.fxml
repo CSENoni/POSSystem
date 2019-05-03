@@ -10,7 +10,7 @@
    <children>
       <HBox>
          <children>
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="122.0" text="Home">
+            <Button mnemonicParsing="false" onAction="#toHome" prefHeight="75.0" prefWidth="122.0" text="Home">
                <font>
                   <Font size="27.0" />
                </font>
@@ -20,7 +20,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="122.0" text="Logout">
+            <Button mnemonicParsing="false" onAction="#toLogin" prefHeight="75.0" prefWidth="122.0" text="Logout">
                <font>
                   <Font size="27.0" />
                </font>
