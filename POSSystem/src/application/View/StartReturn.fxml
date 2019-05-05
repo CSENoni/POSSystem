@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.StartReturnController">
+   <children>
+      <fx:include fx:id="headerView" source="Header.fxml" />
+      <Label layoutX="183.0" layoutY="177.0" prefHeight="50.0" prefWidth="206.0" text="Sale Number: ">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="saleNumber" layoutX="389.0" layoutY="177.0" prefHeight="50.0" prefWidth="317.0" promptText="Enter Sale Number" />
+      <Button layoutX="343.0" layoutY="283.0" mnemonicParsing="false" onAction="#toReturns" prefHeight="50.0" prefWidth="215.0" text="Return Item">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="343.0" layoutY="354.0" mnemonicParsing="false" onAction="#toReturns" prefHeight="50.0" prefWidth="215.0" text="Return All">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
