@@ -22,4 +22,8 @@ public class CheckoutController {
 	public void completeTransaction(ActionEvent event) throws IOException {
 		POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml");
 	}
+	
+	public void toCancel(ActionEvent event) throws IOException {
+		POSUtils.changeScene(event, getClass(), "../view/SaleCancel.fxml");
+	}
 }

@@ -20,7 +20,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Button layoutX="559.0" layoutY="155.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="265.0" text="Cancel Sale">
+      <Button layoutX="559.0" layoutY="155.0" onAction="#toCancel" mnemonicParsing="false" prefHeight="71.0" prefWidth="265.0" text="Cancel Sale">
          <font>
             <Font size="30.0" />
          </font>
