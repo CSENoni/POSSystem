@@ -77,7 +77,7 @@
             </Button>
          </children>
       </GridPane>
-      <Button contentDisplay="TOP" layoutX="532.0" layoutY="103.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="100.0" text="Check Out" textAlignment="CENTER" wrapText="true">
+      <Button contentDisplay="TOP" layoutX="532.0" layoutY="103.0" mnemonicParsing="false" onAction="#toCheckOut" prefHeight="125.0" prefWidth="100.0" text="Check Out" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>
