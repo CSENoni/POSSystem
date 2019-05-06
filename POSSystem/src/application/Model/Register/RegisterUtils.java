@@ -35,7 +35,7 @@ public class RegisterUtils {
 	
 	public static List<RegisterData> getAll() {
 		try {
-			File file = new File("example.txt");
+			File file = new File("Register.txt");
 			FileInputStream fs = null;
 			ObjectInputStream oi = null;
 			if(file.exists()) {
