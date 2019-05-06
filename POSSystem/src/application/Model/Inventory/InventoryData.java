@@ -1,16 +1,25 @@
 package application.Model.Inventory;
 
-public class InventoryData {
+import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class InventoryData implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private int productId;
 	private String productName;
+	private String supplier;
 	private double price;
 	private int stockQuantity; //the number of items in stock at the store
+	private int outstandingOrder; // number of quantity in pending orders
+	private static AtomicInteger id_generator = new AtomicInteger(0);
 	
-	public InventoryData(int productId, String productName, double price, int quantity) {
-		this.productId = productId;
+	public InventoryData(String productName, String supplier, double price, int quantity) {
+		this.productId = id_generator.getAndIncrement();
 		this.productName = productName;
 		this.price = price;
-		this.stockQuantity = stockQuantity;
+		this.supplier = supplier;
+		this.stockQuantity = quantity;
 	}
 	
 	public int getProductId() {
@@ -21,6 +30,10 @@ public class InventoryData {
 		return productName;
 	}
 	
+	public String getSupplier() {
+		return this.supplier;
+	}
+	
 	public double getPrice() {
 		return price;
 	}
@@ -29,11 +42,23 @@ public class InventoryData {
 		return stockQuantity;
 	}
 	
-	public void addProduct() { //after replenishing the inventory or a return
-		this.stockQuantity++;
+	public int getOutstandingOrder() {
+		return outstandingOrder;
 	}
 	
-	public void removeProduct() { //after a customer makes a purchase
-		this.stockQuantity--;
+	public void addOutstandingOrder(int quantity) {
+		this.outstandingOrder += quantity;
+	}
+	
+	public void removeOutstandingOrder(int quantity) {
+		this.outstandingOrder -= quantity;
+	}
+	
+	public void addProduct(int quantity) { //after replenishing the inventory or a return
+		this.stockQuantity += quantity;
+	}
+	
+	public void removeProduct(int quantity) { //after a customer makes a purchase
+		this.stockQuantity -= quantity;
 	}
 }
