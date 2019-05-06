@@ -3,38 +3,37 @@ package application.Model.Inventory;
 public class InventoryData {
 	private int productId;
 	private String productName;
-	private int price;
-	private int quantity;
-	private List<Integer> productIds;
+	private double price;
+	private int stockQuantity; //the number of items in stock at the store
 	
-	public InventoryData(int productId, String productName, int price, int quantity) {
-		this.proudctId = productId;
+	public InventoryData(int productId, String productName, double price, int quantity) {
+		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
-		this.quantity = quantity;
+		this.stockQuantity = stockQuantity;
 	}
 	
-	public getProductId() {
+	public int getProductId() {
 		return productId;
 	}
 	
-	public getProductName() {
+	public String getProductName() {
 		return productName;
 	}
 	
-	public getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	
-	public getQuantity() {
-		return quantity;
+	public int getStockQuantity() {
+		return stockQuantity;
 	}
 	
-	public void addProduct() {
-		this.quantity++;
+	public void addProduct() { //after replenishing the inventory or a return
+		this.stockQuantity++;
 	}
 	
-	public void removeProduct() {
-		this.quantity--;
+	public void removeProduct() { //after a customer makes a purchase
+		this.stockQuantity--;
 	}
 }
