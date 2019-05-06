@@ -14,7 +14,7 @@ public class RegisterUtils {
 		try {
 			List<RegisterData> datas = getAll();
 			
-			FileOutputStream fs = new FileOutputStream(new File("example.txt"));
+			FileOutputStream fs = new FileOutputStream(new File("Register.txt"));
 			ObjectOutputStream o = new ObjectOutputStream(fs);
 			
 			if(datas == null) {
