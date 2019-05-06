@@ -19,7 +19,7 @@ public class RegisterData implements Serializable{
 	private double amountOfSales;
 	private static AtomicInteger id_intgenerator = new AtomicInteger(0);
 	
-	public RegisterData(int userId, Date date, double amountOfSales) {
+	public RegisterData(int userId, double amountOfSales) {
 		String id_generator = getUniqueId();
 		if(id_generator == null) {
 			id = "" + id_intgenerator.getAndIncrement();
@@ -28,7 +28,7 @@ public class RegisterData implements Serializable{
 		}
 		userIds = new LinkedList<Integer>();
 		userIds.add(userId);
-		this.date = date;
+		this.date = new Date();
 		this.amountOfSales = amountOfSales;
 	}
 	
@@ -69,9 +69,4 @@ public class RegisterData implements Serializable{
  		}
  		return null;
  	}
-	
-	@Override
-	public String toString() {
-		return "Register: " + this.id + " Amount: " + this.amountOfSales;
-	}
 }
