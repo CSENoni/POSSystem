@@ -22,5 +22,38 @@ public class Products {
 //		this.products.add(new InventoryData(100, "Orange Juice", 1.10, 19));
 	}
 	
+	public String toString() {
+        String i="";
+        i+="Inventory in stock:\n";
+        for (InventoryData product:this.products) {
+            i+='\t'+product.toString();
+        }
+        return i;
+    }
 	
+	//The stock increases after replenishing the inventory or a return
+	
+	public void increaseStock(int productId) { 
+        for (InventoryData product : this.products) {
+            if (productId == product.getProductId()) {
+                product.addProduct();
+                return;
+            }
+        }
+    }
+
+	//The stock decreases after a customer makes a purchase
+	
+    public void reduceStock(int productId) { 
+        for (InventoryData product : this.products) {
+            if (productId == product.getProductId()) {
+                if (product.getStockQuantity()>=0) {
+                    product.removeProduct();
+                }
+                return;
+            }
+        }
+    }
+
+}
 }
