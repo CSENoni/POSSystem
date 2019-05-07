@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
    <children>
@@ -21,7 +22,7 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <TextField fx:id="userName" />
+            <TextField fx:id="userName" onKeyReleased="#fieldFilling" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="96.0" text="Password:">
                <font>
                   <Font size="24.0" />
@@ -30,7 +31,7 @@
                   <Insets bottom="10.0" top="30.0" />
                </padding>
             </Label>
-            <PasswordField fx:id="userPassword" />
+            <PasswordField fx:id="userPassword" onKeyReleased="#fieldFilling" />
          </children>
       </VBox>
       <Button layoutX="407.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginToHomeScreen" prefHeight="49.0" prefWidth="86.0" text="Login">
@@ -43,5 +44,10 @@
             <Font size="48.0" />
          </font>
       </Label>
+      <Text fx:id="errorInput" fill="RED" layoutX="303.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INVALID USERNAME OR PASSWORD" textAlignment="CENTER" visible="false" wrappingWidth="294.1366882324219">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
