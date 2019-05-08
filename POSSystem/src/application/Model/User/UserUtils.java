@@ -14,7 +14,7 @@ public class UserUtils {
 		List<UserData> datas = getAll();
 		
 		try {
-			FileOutputStream fs = new FileOutputStream(new File("../User.txt"));
+			FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "User.txt"));
 			ObjectOutputStream o = new ObjectOutputStream(fs);
 			
 			if(datas == null) {
@@ -34,7 +34,7 @@ public class UserUtils {
 	}
 	
 	public static boolean get(String username, String password) {
-		File file = new File("../User.txt");
+		File file = new File(new File("").getAbsoluteFile() + File.separator + "User.txt");
 		FileInputStream fs = null;
 		ObjectInputStream o = null;
 		if(file.exists()) {
@@ -60,7 +60,7 @@ public class UserUtils {
 	
 	private static List<UserData> getAll() {
 		try {
-			File file = new File("../User.txt");
+			File file = new File(new File("").getAbsoluteFile() + File.separator + "User.txt");
 			FileInputStream fs = null;
 			ObjectInputStream oi = null;
 			if(file.exists()) {
