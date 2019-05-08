@@ -3,9 +3,9 @@ package application.Model.Inventory;
 import java.util.ArrayList;
 
 public class Products {
-	
+
 	private ArrayList<InventoryData> products = new ArrayList<InventoryData>();
-	
+
 	public Products() {
 		// Since we could go to the Inventory Management on UI to add the product
 		// to file system, so we may not need to code here. But, let's see when
@@ -21,39 +21,38 @@ public class Products {
 //		this.products.add(new InventoryData(90, "Carrots", 1.20, 20));
 //		this.products.add(new InventoryData(100, "Orange Juice", 1.10, 19));
 	}
-	
+
 	public String toString() {
-        String i="";
-        i+="Inventory in stock:\n";
-        for (InventoryData product:this.products) {
-            i+='\t'+product.toString();
-        }
-        return i;
-    }
-	
-	//The stock increases after replenishing the inventory or a return
-	
-	public void increaseStock(int productId) { 
-        for (InventoryData product : this.products) {
-            if (productId == product.getProductId()) {
-                product.addProduct();
-                return;
-            }
-        }
-    }
+		String i = "";
+		i += "Inventory in stock:\n";
+		for (InventoryData product : this.products) {
+			i += '\t' + product.toString();
+		}
+		return i;
+	}
 
-	//The stock decreases after a customer makes a purchase
-	
-    public void reduceStock(int productId) { 
-        for (InventoryData product : this.products) {
-            if (productId == product.getProductId()) {
-                if (product.getStockQuantity()>=0) {
-                    product.removeProduct();
-                }
-                return;
-            }
-        }
-    }
+	// The stock increases after replenishing the inventory or a return
 
-}
+	public void increaseStock(int productId) {
+		for (InventoryData product : this.products) {
+			if (productId == product.getProductId()) {
+				product.addProduct(1);
+				return;
+			}
+		}
+	}
+
+	// The stock decreases after a customer makes a purchase
+
+	public void reduceStock(int productId) {
+		for (InventoryData product : this.products) {
+			if (productId == product.getProductId()) {
+				if (product.getStockQuantity() >= 0) {
+					product.removeProduct(1);
+				}
+				return;
+			}
+		}
+	}
+
 }
