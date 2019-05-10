@@ -41,13 +41,13 @@
          <content>
             <TableView fx:id="tableData" prefHeight="423.0" prefWidth="884.0">
               <columns>
-                <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="#"/>
-                <TableColumn fx:id="productColumn" prefWidth="172.8000122308731" text="PRODUCT" />
-                <TableColumn fx:id="supplierColumn" prefWidth="160.800048828125" text="SUPPLIER" />
-                  <TableColumn fx:id="quantityColumn" prefWidth="156.80007934570312" text="QUANTITY" />
-                  <TableColumn fx:id="priceColumn" prefWidth="125.5999755859375" text="PRICE" />
-                  <TableColumn fx:id="pendingColumn" minWidth="9.60003662109375" prefWidth="129.59991455078125" text="PENDING" />
-                  <TableColumn fx:id="thresholdColumn" prefWidth="139.2000732421875" text="THRESHOLD" />
+                <TableColumn fx:id="productIdColumn" prefWidth="51.200013756752014" text="#" />
+                <TableColumn fx:id="productColumn" prefWidth="163.99996185302734" text="PRODUCT" />
+                <TableColumn fx:id="supplierColumn" prefWidth="152.00006103515625" text="SUPPLIER" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="155.19998168945312" text="QUANTITY" />
+                  <TableColumn fx:id="priceColumn" prefWidth="140.00006103515625" text="PRICE" />
+                  <TableColumn fx:id="pendingColumn" minWidth="0.0" prefWidth="126.39996337890625" text="PENDING" />
+                  <TableColumn fx:id="thresholdColumn" maxWidth="117.60003662109375" minWidth="-1.0" prefWidth="96.0" text="THRESHOLD" />
               </columns>
             </TableView>
          </content>
