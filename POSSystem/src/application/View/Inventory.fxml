@@ -42,11 +42,12 @@
             <TableView fx:id="tableData" prefHeight="423.0" prefWidth="884.0">
               <columns>
                   <!-- <TableColumn fx:id="number" prefWidth="75.0" />  -->
-                <TableColumn fx:id="productColumn" prefWidth="191.99996185302734" text="PRODUCT" />
-                <TableColumn fx:id="supplierColumn" prefWidth="170.4000244140625" text="SUPPLIER" />
-                  <TableColumn fx:id="quantityColumn" prefWidth="144.80001831054688" text="QUANTITY" />
-                  <TableColumn fx:id="pendingColumn" minWidth="9.60003662109375" prefWidth="148.800048828125" text="PENDING" />
-                  <TableColumn fx:id="thresholdColumn" prefWidth="149.60003662109375" text="THRESHOLD" />
+                <TableColumn fx:id="productColumn" prefWidth="172.8000122308731" text="PRODUCT" />
+                <TableColumn fx:id="supplierColumn" prefWidth="160.800048828125" text="SUPPLIER" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="156.80007934570312" text="QUANTITY" />
+                  <TableColumn fx:id="priceColumn" prefWidth="125.5999755859375" text="PRICE" />
+                  <TableColumn fx:id="pendingColumn" minWidth="9.60003662109375" prefWidth="129.59991455078125" text="PENDING" />
+                  <TableColumn fx:id="thresholdColumn" prefWidth="139.2000732421875" text="THRESHOLD" />
               </columns>
             </TableView>
          </content>

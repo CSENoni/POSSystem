@@ -70,6 +70,19 @@
                   <Insets left="50.0" right="200.0" />
                </VBox.margin>
             </TextField>
+            <Label prefHeight="24.0" prefWidth="102.0" text="Price (per unit)">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="50.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="priceField" onKeyTyped="#priceInputValidation" prefWidth="371.0">
+               <VBox.margin>
+                  <Insets left="50.0" right="200.0" />
+               </VBox.margin>
+            </TextField>
             <Label prefHeight="27.0" prefWidth="61.0" text="Quantity">
                <font>
                   <Font size="15.0" />

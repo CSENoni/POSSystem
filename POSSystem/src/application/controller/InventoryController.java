@@ -35,6 +35,9 @@ public class InventoryController {
 	private TableColumn<InventoryData, String> supplierColumn;
 	
 	@FXML
+	private TableColumn<InventoryData, Double> priceColumn;
+	
+	@FXML
 	private TableColumn<InventoryData, Integer> quantityColumn;
 	
 	@FXML
@@ -57,6 +60,7 @@ public class InventoryController {
 //		numberColumn.setCellValueFactory(new PropertyValueFactory<>("ProductId"));
 		productColumn.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		supplierColumn.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("StockQuantity"));
 		pendingColumn.setCellValueFactory(new PropertyValueFactory<>("OutstandingOrder"));
 		thresholdColumn.setCellValueFactory(new PropertyValueFactory<>("Threshold"));

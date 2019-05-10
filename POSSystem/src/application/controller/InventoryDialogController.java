@@ -21,7 +21,10 @@ public class InventoryDialogController {
 
 	@FXML
 	private TextField supplierField;
-
+	
+	@FXML
+	private TextField priceField;
+	
 	@FXML
 	private TextField quantityField;
 
@@ -43,15 +46,16 @@ public class InventoryDialogController {
 	}
 
 	public void confirmItemDetail(ActionEvent event) {
-		if (areValidFields(productField.getText(), supplierField.getText(), quantityField.getText(),
-				thresholdField.getText())) {
+		if (areValidFields(productField.getText(), supplierField.getText(), priceField.getText(), 
+				quantityField.getText(), thresholdField.getText())) {
 			errorMessage.setVisible(false);
 			String productName = productField.getText();
 			String supplier = supplierField.getText();
+			double price = Double.parseDouble(priceField.getText());
 			int quantity = Integer.parseInt(quantityField.getText());
 			int threshold = Integer.parseInt(thresholdField.getText());
 
-			InventoryData newInventoryData = new InventoryData(productName, supplier, 1200, quantity, threshold);
+			InventoryData newInventoryData = new InventoryData(productName, supplier, price, quantity, threshold);
 			InventoryUtils.write(newInventoryData);
 
 			data.add(newInventoryData);
@@ -66,6 +70,10 @@ public class InventoryDialogController {
 		stage.close();
 	}
 	
+	public void priceInputValidation(KeyEvent event) {
+		if(!isDouble(event.getCharacter())) event.consume();
+	}
+	
 	public void quantityInputValidation(KeyEvent event) {
 		if(!isNumeric(event.getCharacter())) event.consume();
 	}
@@ -74,7 +82,7 @@ public class InventoryDialogController {
 		if(!isNumeric(event.getCharacter())) event.consume();
 	}
 	
-	private boolean areValidFields(String product, String supplier, String quantity, String threshold) {
+	private boolean areValidFields(String product, String supplier, String price, String quantity, String threshold) {
 		boolean allGood = true;
 		String errorStyle = "-fx-border-width: 3,3,3,3; -fx-border-color: red;";
 		if (!isNotEmpty(product)) {
@@ -90,7 +98,14 @@ public class InventoryDialogController {
 		} else {
 			supplierField.setStyle("");
 		}
-
+		
+		if(!isNotEmpty(price)) {
+			allGood = false;
+			priceField.setStyle(errorStyle);
+		}else {
+			priceField.setStyle("");
+		}
+		
 		if (!isNotEmpty(quantity)) {
 			allGood = false;
 			quantityField.setStyle(errorStyle);
@@ -116,6 +131,17 @@ public class InventoryDialogController {
 		for (int j = 0; j < number.length(); j++) {
 			char c = number.charAt(j);
 			if (c > 31 && (c < 48 || c > 57)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean isDouble(String value) {
+		String number = value.replaceAll("\\s+", "");
+		for (int j = 0; j < number.length(); j++) {
+			char c = number.charAt(j);
+			if (c != 46 && c > 31 && (c < 48 || c > 57)) {
 				return false;
 			}
 		}
