@@ -15,7 +15,7 @@ public class InventoryUtils {
 		try {
 			List<InventoryData> datas = getAll();
 
-			FileOutputStream fs = new FileOutputStream(new File("Inventory.txt"));
+			FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "Inventory.txt"));
 			ObjectOutputStream o = new ObjectOutputStream(fs);
 
 			if (datas == null) {
@@ -36,7 +36,7 @@ public class InventoryUtils {
 
 	public static List<InventoryData> getAll() {
 		try {
-			File file = new File("Inventory.txt");
+			File file = new File(new File("").getAbsoluteFile() + File.separator + "Inventory.txt");
 			FileInputStream fs = null;
 			ObjectInputStream oi = null;
 			if (file.exists()) {
@@ -59,7 +59,7 @@ public class InventoryUtils {
 		if(datas != null) {
 			datas.remove(position);
 			try {
-				FileOutputStream fs = new FileOutputStream(new File("Inventory.txt"));
+				FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "Inventory.txt"));
 				ObjectOutputStream o = new ObjectOutputStream(fs);
 				
 				o.writeObject(datas);
