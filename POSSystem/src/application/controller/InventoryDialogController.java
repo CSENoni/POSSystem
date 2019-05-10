@@ -55,7 +55,7 @@ public class InventoryDialogController {
 			int quantity = Integer.parseInt(quantityField.getText());
 			int threshold = Integer.parseInt(thresholdField.getText());
 
-			InventoryData newInventoryData = new InventoryData(productName, supplier, price, quantity, threshold);
+			InventoryData newInventoryData = new InventoryData(data.size(), productName, supplier, price, quantity, threshold);
 			InventoryUtils.write(newInventoryData);
 
 			data.add(newInventoryData);

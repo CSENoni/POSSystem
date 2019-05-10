@@ -13,10 +13,9 @@ public class InventoryData implements Serializable {
 	private int stockQuantity; //the number of items in stock at the store
 	private int outstandingOrder; // number of quantity in pending orders
 	private int threshold;
-	private static AtomicInteger id_generator = new AtomicInteger(0);
 	
-	public InventoryData(String productName, String supplier, double price, int quantity, int threshold) {
-		this.productId = id_generator.getAndIncrement();
+	public InventoryData(int id, String productName, String supplier, double price, int quantity, int threshold) {
+		this.productId = id;
 		this.productName = productName;
 		this.price = price;
 		this.supplier = supplier;

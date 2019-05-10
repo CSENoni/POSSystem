@@ -26,7 +26,7 @@ public class InventoryController {
 	private TableView<InventoryData> tableData;
 	
 	@FXML
-	private TableColumn<InventoryData, Integer> numberColumn;
+	private TableColumn<InventoryData, Integer> productIdColumn;
 	
 	@FXML
 	private TableColumn<InventoryData, String> productColumn;
@@ -57,7 +57,7 @@ public class InventoryController {
 		if(list != null)
 			inventoryData.addAll(list);
 		
-//		numberColumn.setCellValueFactory(new PropertyValueFactory<>("ProductId"));
+		productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductId"));
 		productColumn.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		supplierColumn.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));

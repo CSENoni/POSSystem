@@ -41,7 +41,7 @@
          <content>
             <TableView fx:id="tableData" prefHeight="423.0" prefWidth="884.0">
               <columns>
-                  <!-- <TableColumn fx:id="number" prefWidth="75.0" />  -->
+                <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="#"/>
                 <TableColumn fx:id="productColumn" prefWidth="172.8000122308731" text="PRODUCT" />
                 <TableColumn fx:id="supplierColumn" prefWidth="160.800048828125" text="SUPPLIER" />
                   <TableColumn fx:id="quantityColumn" prefWidth="156.80007934570312" text="QUANTITY" />
