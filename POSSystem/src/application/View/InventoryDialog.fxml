@@ -30,7 +30,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelItemDetail" prefHeight="44.0" prefWidth="95.0" text="Cancel">
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#closeItemDetail" prefHeight="44.0" prefWidth="95.0" text="Cancel">
                <font>
                   <Font size="18.0" />
                </font>
@@ -79,19 +79,6 @@
                </VBox.margin>
             </Label>
             <TextField fx:id="quantityField" prefWidth="371.0">
-               <VBox.margin>
-                  <Insets left="50.0" right="200.0" />
-               </VBox.margin>
-            </TextField>
-            <Label prefHeight="27.0" prefWidth="61.0" text="Pending">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="50.0" top="10.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="pendingField" prefWidth="371.0">
                <VBox.margin>
                   <Insets left="50.0" right="200.0" />
                </VBox.margin>

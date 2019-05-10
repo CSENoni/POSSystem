@@ -39,14 +39,14 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <TableView prefHeight="423.0" prefWidth="884.0">
+            <TableView fx:id="tableData" prefHeight="423.0" prefWidth="884.0">
               <columns>
-                  <TableColumn prefWidth="75.0" />
-                <TableColumn prefWidth="191.99996185302734" text="PRODUCT" />
-                <TableColumn prefWidth="170.4000244140625" text="SUPPLIER" />
-                  <TableColumn prefWidth="144.80001831054688" text="QUANTITY" />
-                  <TableColumn minWidth="9.60003662109375" prefWidth="148.800048828125" text="PENDING" />
-                  <TableColumn prefWidth="149.60003662109375" text="THRESHOLD" />
+                  <!-- <TableColumn fx:id="number" prefWidth="75.0" />  -->
+                <TableColumn fx:id="productColumn" prefWidth="191.99996185302734" text="PRODUCT" />
+                <TableColumn fx:id="supplierColumn" prefWidth="170.4000244140625" text="SUPPLIER" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="144.80001831054688" text="QUANTITY" />
+                  <TableColumn fx:id="pendingColumn" minWidth="9.60003662109375" prefWidth="148.800048828125" text="PENDING" />
+                  <TableColumn fx:id="thresholdColumn" prefWidth="149.60003662109375" text="THRESHOLD" />
               </columns>
             </TableView>
          </content>
