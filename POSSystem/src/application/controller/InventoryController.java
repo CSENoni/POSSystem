@@ -89,6 +89,10 @@ public class InventoryController {
 	}
 	
 	public void removeItem(ActionEvent event) {
-		
+		InventoryData item = tableData.getSelectionModel().getSelectedItem();
+		if(item != null) {
+			inventoryData.remove(item);
+			InventoryUtils.remove(item);
+		}
 	}
 }

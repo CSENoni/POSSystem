@@ -52,11 +52,17 @@ public class InventoryUtils {
 		return null;
 	}
 	
-	public static void remove(int position) {
+	public static void remove(InventoryData data) {
 		List<InventoryData> datas = getAll();
 		
 		if(datas != null) {
-			datas.remove(position);
+			for(InventoryData item : datas) {
+				if(item.getProductId() == data.getProductId() && item.getProductName().equals(data.getProductName()) 
+						&& item.getSupplier().equals(data.getSupplier())) {
+					datas.remove(item);
+					break;
+				}
+			}
 			try {
 				FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "Inventory.txt"));
 				ObjectOutputStream o = new ObjectOutputStream(fs);
