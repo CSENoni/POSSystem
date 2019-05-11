@@ -35,16 +35,22 @@ public class InventoryDialogController {
 	private Text errorMessage;
 	
 	private ObservableList<InventoryData> data;
+	
+	private InventoryData item;
 
-	@FXML
-	private void initialize() {
-
-	}
-
-	public void setInventoryData(ObservableList<InventoryData> data) {
+	public void setInventoryData(ObservableList<InventoryData> data, InventoryData item) {
 		this.data = data;
+		this.item = item;
+		
+		if(item != null) {
+			productField.setText(item.getProductName());
+			supplierField.setText(item.getSupplier());
+			priceField.setText(String.valueOf(item.getPrice()));
+			quantityField.setText(String.valueOf(item.getStockQuantity()));
+			thresholdField.setText(String.valueOf(item.getThreshold()));
+		}
 	}
-
+	
 	public void confirmItemDetail(ActionEvent event) {
 		if (areValidFields(productField.getText(), supplierField.getText(), priceField.getText(), 
 				quantityField.getText(), thresholdField.getText())) {
@@ -54,11 +60,28 @@ public class InventoryDialogController {
 			double price = Double.parseDouble(priceField.getText());
 			int quantity = Integer.parseInt(quantityField.getText());
 			int threshold = Integer.parseInt(thresholdField.getText());
+			
+			if(item == null) {
+				InventoryData newInventoryData = new InventoryData(productName, supplier, price, quantity, threshold);
+				InventoryUtils.write(newInventoryData);
 
-			InventoryData newInventoryData = new InventoryData(productName, supplier, price, quantity, threshold);
-			InventoryUtils.write(newInventoryData);
-
-			data.add(newInventoryData);
+				data.add(newInventoryData);
+			}else {
+				for(int i = 0; i < data.size(); i++) {
+					if(data.get(i).equals(item)) {
+						item.setProductName(productName);
+						item.setSupplier(supplier);
+						item.setPrice(price);
+						item.setStockQuantity(quantity);
+						item.setThreshold(threshold);
+						
+						data.set(i, item);
+						InventoryUtils.update(i, item);
+						break;
+					}
+				}
+			}
+			
 			closeItemDetail(event);
 		}else {
 			errorMessage.setVisible(true);

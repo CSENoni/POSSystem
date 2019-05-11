@@ -21,42 +21,42 @@ import javafx.stage.Stage;
 public class InventoryController {
 	@FXML
 	private HeaderController headerViewController;
-	
+
 	@FXML
 	private TableView<InventoryData> tableData;
-	
+
 	@FXML
 	private TableColumn<InventoryData, Integer> productIdColumn;
-	
+
 	@FXML
 	private TableColumn<InventoryData, String> productColumn;
-	
+
 	@FXML
 	private TableColumn<InventoryData, String> supplierColumn;
-	
+
 	@FXML
 	private TableColumn<InventoryData, Double> priceColumn;
-	
+
 	@FXML
 	private TableColumn<InventoryData, Integer> quantityColumn;
-	
+
 	@FXML
 	private TableColumn<InventoryData, Integer> pendingColumn;
-	
+
 	@FXML
 	private TableColumn<InventoryData, Integer> thresholdColumn;
-	
+
 	private ObservableList<InventoryData> inventoryData;
-	
+
 	@FXML
 	private void initialize() {
 		headerViewController.setTitle("INVENTORY");
 		inventoryData = FXCollections.observableArrayList();
-		
+
 		List<InventoryData> list = InventoryUtils.getAll();
-		if(list != null)
+		if (list != null)
 			inventoryData.addAll(list);
-		
+
 		productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductId"));
 		productColumn.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		supplierColumn.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
@@ -64,17 +64,18 @@ public class InventoryController {
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("StockQuantity"));
 		pendingColumn.setCellValueFactory(new PropertyValueFactory<>("OutstandingOrder"));
 		thresholdColumn.setCellValueFactory(new PropertyValueFactory<>("Threshold"));
-		
+
 		tableData.setItems(inventoryData);
+		tableData.setEditable(true);
 	}
-	
+
 	public void addNewItem(ActionEvent event) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/InventoryDialog.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
 			InventoryDialogController dialogController = fxmlLoader.getController();
-			dialogController.setInventoryData(inventoryData);
-			
+			dialogController.setInventoryData(inventoryData, null);
+
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
@@ -83,13 +84,30 @@ public class InventoryController {
 			e.printStackTrace();
 		}
 	}
-	
-	public void editItem(ActionEvent event) {	
+
+	public void editItem(ActionEvent event) {
+		if (inventoryData != null && inventoryData.size() > 0) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/InventoryDialog.fxml"));
+				Parent root = (Parent) fxmlLoader.load();
+
+				InventoryDialogController dialogController = fxmlLoader.getController();
+				InventoryData item = tableData.getSelectionModel().getSelectedItem();
+				dialogController.setInventoryData(inventoryData, item);
+
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root));
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-	
+
 	public void removeItem(ActionEvent event) {
 		InventoryData item = tableData.getSelectionModel().getSelectedItem();
-		if(item != null) {
+		if (item != null) {
 			inventoryData.remove(item);
 			InventoryUtils.remove(item);
 		}

@@ -32,16 +32,32 @@ public class InventoryData implements Serializable {
 		return productName;
 	}
 	
+	public void setProductName(String name) {
+		this.productName = name;
+	}
+	
 	public String getSupplier() {
 		return this.supplier;
+	}
+	
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
 	}
 	
 	public double getPrice() {
 		return price;
 	}
 	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 	public int getStockQuantity() {
 		return stockQuantity;
+	}
+	
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
 	}
 	
 	public int getOutstandingOrder() {
@@ -66,5 +82,9 @@ public class InventoryData implements Serializable {
 	
 	public int getThreshold() {
 		return this.threshold;
+	}
+	
+	public void setThreshold(int threshold) {
+		this.threshold = threshold;
 	}
 }
