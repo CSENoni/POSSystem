@@ -84,8 +84,7 @@ public class InventoryController {
 		}
 	}
 	
-	public void editItem(ActionEvent event) {
-		
+	public void editItem(ActionEvent event) {	
 	}
 	
 	public void removeItem(ActionEvent event) {
