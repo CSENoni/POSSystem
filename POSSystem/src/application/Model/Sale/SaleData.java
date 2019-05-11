@@ -1,6 +1,7 @@
 package application.Model.Sale;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,8 @@ public class SaleData {
 	private UserData user;
 	private RegisterData register;
 	private ArrayList<InventoryData> items = new ArrayList<InventoryData>();
+	DecimalFormat decim = new DecimalFormat("#,###.00");
+
 	
 	public SaleData() {
 		this.saleNumber = saleGen.getAndIncrement();
@@ -47,6 +50,10 @@ public class SaleData {
 		return this.register.getId();
 	}
 	
+	public String printSaleTotal() {
+		return decim.format(this.saleTotal);
+	}
+	
 	//Adding and Removing items from a sale
 	public void addSaleItem(InventoryData item) {
 		items.add(item);
@@ -55,7 +62,6 @@ public class SaleData {
 	}
 	
 	public void removeSaleItem(String itemName) {
-		int itemIndex;
 		Iterator<InventoryData> iterator = items.iterator(); 
 		while (iterator.hasNext()) {
 			InventoryData product = iterator.next();
@@ -80,29 +86,28 @@ public class SaleData {
 		}
 	}
 	
-	//Count elements of Sale 
-	public void countItems() {
-		Map<InventoryData, Integer> frequencyMap = new HashMap<>();
-		for (InventoryData s: items) {
-			Integer count = frequencyMap.get(s);
-			if (count == null) {
-				count = 0;
+	//Print Sale 
+		public void countItems() {
+			Map<InventoryData, Integer> frequencyMap = new HashMap<>();
+			for (InventoryData s: items) {
+				Integer count = frequencyMap.get(s);
+				if (count == null) {
+					count = 0;
+				}
+				frequencyMap.put(s, count + 1);
 			}
-			else frequencyMap.put(s, count + 1);
+			
+			String top = String.format("%-20s %5s %10s\n", "Product", "Quantity", "Price");
+			String lines = String.format("%-20s %5s %11s", "-------", "--------", "------");
+			String header = top + lines;
+			System.out.println(header);
+			
+			for (Map.Entry<InventoryData, Integer> entry : frequencyMap.entrySet()) {
+				String output = String.format("%-20s %4s %15s\n",entry.getKey().getProductName(), entry.getValue(), decim.format(entry.getKey().getPrice() * entry.getValue()));
+				System.out.print(output);
+			}
 		}
-
-		for (Map.Entry<InventoryData, Integer> entry : frequencyMap.entrySet()) {
-			System.out.println(entry.getKey().getProductName() + ": " + entry.getValue());
-		}
-	}
-	
-	//Get the names of all items in sale
-	public ArrayList<String> getSaleItemNames() {
-		ArrayList<String> itemNames = new ArrayList<String>();
-		for (InventoryData product : items) {
-			itemNames.add(product.getProductName());
-		}
-		return itemNames;
-	}
+		
+		
 }
 
