@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import application.Model.Inventory.InventoryData;
@@ -18,7 +21,7 @@ public class SaleData {
 	private double saleTotal = 0.0;
 	private UserData user;
 	private RegisterData register;
-	private ArrayList<InventoryData> items;
+	private ArrayList<InventoryData> items = new ArrayList<InventoryData>();
 	
 	public SaleData() {
 		this.saleNumber = saleGen.getAndIncrement();
@@ -48,27 +51,53 @@ public class SaleData {
 	public void addSaleItem(InventoryData item) {
 		items.add(item);
 		this.saleTotal = this.saleTotal + item.getPrice();
+		item.setStockQuantity(item.getStockQuantity() - 1);
 	}
 	
 	public void removeSaleItem(String itemName) {
 		int itemIndex;
-		for (InventoryData product : items) {
+		Iterator<InventoryData> iterator = items.iterator(); 
+		while (iterator.hasNext()) {
+			InventoryData product = iterator.next();
 			if (itemName.equalsIgnoreCase(product.getProductName())) {
-				itemIndex = items.indexOf(product);
-				items.remove(itemIndex);
-				this.saleTotal = this.saleTotal - product.getPrice();
+				this.saleTotal = (this.saleTotal - product.getPrice());
+				product.setStockQuantity(product.getStockQuantity() + 1);
+				iterator.remove();
 			}
 		}
 	}
 	
 	//Cancel a Sale
 	public void cancelSale() {
-		this.items.clear();
-		this.saleTotal = 0.0;
+		Iterator<InventoryData> iterator = items.iterator(); 
+		while (iterator.hasNext()) {
+			InventoryData product = iterator.next();
+			if (product != null) {
+				this.saleTotal = (this.saleTotal - product.getPrice());
+				product.setStockQuantity(product.getStockQuantity() + 1);
+				iterator.remove();
+			}
+		}
+	}
+	
+	//Count elements of Sale 
+	public void countItems() {
+		Map<InventoryData, Integer> frequencyMap = new HashMap<>();
+		for (InventoryData s: items) {
+			Integer count = frequencyMap.get(s);
+			if (count == null) {
+				count = 0;
+			}
+			else frequencyMap.put(s, count + 1);
+		}
+
+		for (Map.Entry<InventoryData, Integer> entry : frequencyMap.entrySet()) {
+			System.out.println(entry.getKey().getProductName() + ": " + entry.getValue());
+		}
 	}
 	
 	//Get the names of all items in sale
-	public ArrayList<String> getSaleItemNames(ArrayList<InventoryData> items) {
+	public ArrayList<String> getSaleItemNames() {
 		ArrayList<String> itemNames = new ArrayList<String>();
 		for (InventoryData product : items) {
 			itemNames.add(product.getProductName());
