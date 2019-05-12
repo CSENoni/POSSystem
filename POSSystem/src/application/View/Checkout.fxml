@@ -2,25 +2,26 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CheckoutController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CheckoutController">
 <children>
       <fx:include fx:id="headerView" source="Header.fxml" />
-      <Label fx:id="saleNumber" layoutX="33.0" layoutY="103.0" prefHeight="32.0" prefWidth="400.0" text="Sale Number: ">
+      <Label fx:id="saleNumber" layoutX="33.0" layoutY="103.0" prefHeight="35.0" prefWidth="149.0" text="Sale Number: ">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextArea layoutX="33.0" layoutY="144.0" prefHeight="338.0" prefWidth="455.0" />
-      <Label layoutX="250.0" layoutY="502.0" prefHeight="71.0" prefWidth="400.0" text="Total: ">
+      <Label layoutX="33.0" layoutY="138.0" prefHeight="71.0" prefWidth="68.0" text="Total: ">
          <font>
-            <Font size="35.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="559.0" layoutY="155.0" onAction="#toCancel" mnemonicParsing="false" prefHeight="71.0" prefWidth="265.0" text="Cancel Sale">
+      <Button layoutX="559.0" layoutY="155.0" mnemonicParsing="false" onAction="#toCancel" prefHeight="71.0" prefWidth="265.0" text="Cancel Sale">
          <font>
             <Font size="30.0" />
          </font>
@@ -35,5 +36,62 @@
             <Font size="30.0" />
          </font>
       </Button>
+      <Text layoutX="182.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="265.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="totalPrice" layoutX="182.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="187.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Label layoutX="33.0" layoutY="191.0" prefHeight="71.0" prefWidth="68.0" text="Paid: ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="totalPaid" layoutX="182.0" layoutY="214.0" prefHeight="25.0" prefWidth="187.0" />
+      <Line endX="98.80001831054688" layoutX="276.0" layoutY="262.0" startX="-100.0" />
+      <Label layoutX="33.0" layoutY="262.0" prefHeight="71.0" prefWidth="68.0" text="Due: ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text fx:id="totalDue" layoutX="182.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="187.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Label layoutX="33.0" layoutY="313.0" prefHeight="71.0" prefWidth="95.0" text="Change: ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text fx:id="totalChange" layoutX="182.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="187.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Label alignment="CENTER_RIGHT" layoutX="114.0" layoutY="138.0" prefHeight="71.0" prefWidth="68.0" text="\$" textAlignment="RIGHT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="114.0" layoutY="191.0" prefHeight="71.0" prefWidth="68.0" text="\$" textAlignment="RIGHT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="114.0" layoutY="262.0" prefHeight="71.0" prefWidth="68.0" text="\$" textAlignment="RIGHT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="114.0" layoutY="313.0" prefHeight="71.0" prefWidth="68.0" text="\$" textAlignment="RIGHT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
