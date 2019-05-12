@@ -1,5 +1,8 @@
 package application.Model.Sale;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -24,6 +27,8 @@ public class SaleData {
 	private RegisterData register;
 	private ArrayList<InventoryData> items = new ArrayList<InventoryData>();
 	DecimalFormat decim = new DecimalFormat("#,###.00");
+	private String allSaleItems;
+	private String output;
 
 	
 	public SaleData() {
@@ -86,28 +91,59 @@ public class SaleData {
 		}
 	}
 	
-	//Print Sale 
-		public void countItems() {
-			Map<InventoryData, Integer> frequencyMap = new HashMap<>();
-			for (InventoryData s: items) {
-				Integer count = frequencyMap.get(s);
-				if (count == null) {
-					count = 0;
-				}
-				frequencyMap.put(s, count + 1);
+	//Print Items of Sale 
+	public void countItems() {
+		Map<InventoryData, Integer> frequencyMap = new HashMap<>();
+		for (InventoryData s: items) {
+			Integer count = frequencyMap.get(s);
+			if (count == null) {
+				count = 0;
 			}
-			
-			String top = String.format("%-20s %5s %10s\n", "Product", "Quantity", "Price");
-			String lines = String.format("%-20s %5s %11s", "-------", "--------", "------");
-			String header = top + lines;
-			System.out.println(header);
-			
-			for (Map.Entry<InventoryData, Integer> entry : frequencyMap.entrySet()) {
-				String output = String.format("%-20s %4s %15s\n",entry.getKey().getProductName(), entry.getValue(), decim.format(entry.getKey().getPrice() * entry.getValue()));
-				System.out.print(output);
-			}
+			frequencyMap.put(s, count + 1);
 		}
 		
+		String top = String.format("%-20s %5s %10s\n", "Product", "Quantity", "Price");
+		String lines = String.format("%-20s %5s %11s\n", "-------", "--------", "------");
+		this.allSaleItems = top + lines;
+		
+		for (Map.Entry<InventoryData, Integer> entry : frequencyMap.entrySet()) {
+			String sale = String.format("%-20s %4s %15s\n",entry.getKey().getProductName(), entry.getValue(), decim.format(entry.getKey().getPrice() * entry.getValue()));
+			this.allSaleItems = this.allSaleItems + sale;
+		}
+		System.out.print(allSaleItems);
+	}
+	
+	//Checkout Method
+	public void checkout(double payment) {
+		double changeCalc = payment - Double.parseDouble(this.printSaleTotal());
+		
+		try {
+			File file = new File(new File("").getAbsoluteFile() + File.separator + "allSales.txt");
+			FileWriter fileWriter = new FileWriter(file, true);
+			output = this.allSaleItems;
+			output = ("Sale Number: " + this.getSaleNumber() + "\n" + this.getSaleTime() + "\n\n" + this.output);
+			String total = String.format("\n%41s", "Total: $" + this.printSaleTotal());
+			String pay = String.format("\n%41s", "Payment: $" + decim.format(payment));
+			String change = String.format("\n%42s", "Change: $" + decim.format(changeCalc) + "\n\n");
+			output = this.output + total + pay + change;
+			output = this.output + "---------------------------------------------\n\n";
+			
+			if (!file.exists()) {
+				file.createNewFile();
+				fileWriter.write(output);
+				fileWriter.close();
+			}
+			else {
+				fileWriter.write(output);
+				fileWriter.close();
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
 		
 }
 
