@@ -17,9 +17,6 @@ public class SaleController {
 		headerViewController.setTitle("SALE");
 	}
 	
-	@FXML
-	private Label saleNumber;
-	
 	public void toCheckOut(ActionEvent event) throws IOException {
 		POSUtils.changeScene(event, getClass(), "../view/Checkout.fxml");
 	}

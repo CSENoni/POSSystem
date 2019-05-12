@@ -107,7 +107,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Text fx:id="saleNumber" layoutX="183.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000000000000000" wrappingWidth="256.2734375">
+      <Text fx:id="saleNumber" layoutX="183.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.2734375">
          <font>
             <Font size="24.0" />
          </font>
