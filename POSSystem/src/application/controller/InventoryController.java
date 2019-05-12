@@ -86,7 +86,7 @@ public class InventoryController {
 	}
 
 	public void editItem(ActionEvent event) {
-		if (inventoryData != null && inventoryData.size() > 0) {
+		if (inventoryData != null && inventoryData.size() > 0 && tableData.getSelectionModel().getSelectedItem() != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/InventoryDialog.fxml"));
 				Parent root = (Parent) fxmlLoader.load();
