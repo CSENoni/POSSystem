@@ -87,7 +87,7 @@
             <Font size="22.0" />
          </font>
       </Button>
-      <Button layoutX="657.0" layoutY="103.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="185.0" text="Add Item">
+      <Button layoutX="657.0" layoutY="103.0" mnemonicParsing="false" onAction="#addAndEditItem" prefHeight="55.0" prefWidth="185.0" text="Add Item">
          <font>
             <Font size="24.0" />
          </font>
