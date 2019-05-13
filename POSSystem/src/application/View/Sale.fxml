@@ -13,17 +13,12 @@
    <children>
       <fx:include fx:id="headerView" source="Header.fxml" />
       
-      <Button layoutX="533.0" layoutY="145.0" mnemonicParsing="false" onAction="#toCheckOut" prefHeight="125.0" prefWidth="100.0" text="Check Out" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="567.0" layoutY="259.0" mnemonicParsing="false" onAction="#toCheckOut" prefHeight="82.0" prefWidth="256.0" text="Check Out" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
-      <Button layoutX="657.0" layoutY="145.0" mnemonicParsing="false" onAction="#addAndEditItem" prefHeight="55.0" prefWidth="185.0" text="Add Item">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button layoutX="657.0" layoutY="215.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="185.0" text="Remove Item">
+      <Button layoutX="567.0" layoutY="145.0" mnemonicParsing="false" onAction="#addAndEditItem" prefHeight="82.0" prefWidth="256.0" text="Edit Items">
          <font>
             <Font size="24.0" />
          </font>
@@ -33,7 +28,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="533.0" layoutY="389.0" prefHeight="35.0" prefWidth="100.0" text="Total:  $">
+      <Label alignment="TOP_LEFT" layoutX="533.0" layoutY="409.0" prefHeight="35.0" prefWidth="100.0" text="Total:  $">
          <font>
             <Font size="24.0" />
          </font>
@@ -43,7 +38,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="totalPrice" layoutX="621.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.2734375">
+      <Text fx:id="totalPrice" layoutX="631.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.2734375">
          <font>
             <Font size="24.0" />
          </font>

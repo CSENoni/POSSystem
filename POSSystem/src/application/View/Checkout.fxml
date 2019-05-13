@@ -11,12 +11,12 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CheckoutController">
 <children>
       <fx:include fx:id="headerView" source="Header.fxml" />
-      <Label fx:id="saleNumber" layoutX="33.0" layoutY="103.0" prefHeight="35.0" prefWidth="149.0" text="Sale Number: ">
+      <Label layoutX="33.0" layoutY="103.0" prefHeight="35.0" prefWidth="165.0" text="Sale Number: ">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="33.0" layoutY="138.0" prefHeight="71.0" prefWidth="68.0" text="Total: ">
+      <Label layoutX="33.0" layoutY="138.0" prefHeight="71.0" prefWidth="86.0" text="Total: ">
          <font>
             <Font size="24.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Text layoutX="182.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="265.0">
+      <Text fx:id="saleNumber" layoutX="193.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="265.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Label layoutX="33.0" layoutY="313.0" prefHeight="71.0" prefWidth="95.0" text="Change: ">
+      <Label layoutX="33.0" layoutY="313.0" prefHeight="71.0" prefWidth="103.0" text="Change: ">
          <font>
             <Font size="24.0" />
          </font>

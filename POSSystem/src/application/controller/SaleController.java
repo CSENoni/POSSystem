@@ -50,8 +50,6 @@ public class SaleController {
 	@FXML
 	private void initialize() {
 		headerViewController.setTitle("SALE");
-		saleNumber.setText(this.getSaleNumber());
-		totalPrice.setText(this.getSaleTotal());
 		
 		inventorySaleList = FXCollections.observableArrayList();
 		
@@ -61,6 +59,11 @@ public class SaleController {
 		
 		tableData.setItems(inventorySaleList);
 		tableData.setEditable(true);
+		
+		newSale.editSaleItems(inventorySaleList);
+		saleNumber.setText(this.getSaleNumber());
+		totalPrice.setText(this.getSaleTotal());
+		
 	}
 	
 	public void addAndEditItem(ActionEvent event) {

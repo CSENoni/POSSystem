@@ -6,6 +6,7 @@ import application.Model.POSUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 public class CheckoutController {
 	@FXML
@@ -17,7 +18,7 @@ public class CheckoutController {
 	}
 	
 	@FXML
-	private Label saleNumber;
+	private Text saleNumber;
 	
 	public void completeTransaction(ActionEvent event) throws IOException {
 		POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml");
