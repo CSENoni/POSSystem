@@ -91,6 +91,16 @@ public class SaleAddItemController {
 		saleTable.setEditable(true);
 	}
 	
+	public void removeItemFromSale() {
+		InventoryData item = saleTable.getSelectionModel().getSelectedItem();
+		if (this.getQuantity() >= item.getSaleQuantity())
+			saleList.remove(item);
+		else {
+			item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
+			saleList.set(saleList.indexOf(item), item);
+		}
+	}
+	
 	private void initSpinner() {
         quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99));
     }
