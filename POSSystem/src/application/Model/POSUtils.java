@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class POSUtils {
+	
 	public static void changeScene(ActionEvent event, Class<?> className, String path) throws IOException {
 		Parent view = FXMLLoader.load(className.getResource(path));
 		Scene scene = new Scene(view);
