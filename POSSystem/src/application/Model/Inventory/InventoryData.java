@@ -1,6 +1,7 @@
 package application.Model.Inventory;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class InventoryData implements Serializable {
@@ -16,6 +17,8 @@ public class InventoryData implements Serializable {
 	private static AtomicInteger id_generator = new AtomicInteger(1); 
 	private int saleQuantity; //number of items in a sale
 	private double saleTotal; //total cost of item price x quantity
+	DecimalFormat decim = new DecimalFormat("#,##0.00");
+
 	
 	public InventoryData(String productName, String supplier, double price, int quantity, int threshold) {
 		this.productId = id_generator.getAndIncrement();
@@ -52,6 +55,10 @@ public class InventoryData implements Serializable {
 	
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public String getPrintPrice() {
+		return decim.format(this.price);
 	}
 	
 	public int getStockQuantity() {
@@ -100,6 +107,10 @@ public class InventoryData implements Serializable {
 	
 	public double getSaleTotal() {
 		return this.saleTotal;
+	}
+	
+	public String getPrintSaleTotal() {
+		return decim.format(this.saleTotal);
 	}
 	
 	public boolean isOnSale() {

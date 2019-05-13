@@ -30,7 +30,7 @@ public class SaleAddItemController {
 	private TableColumn<InventoryData, Integer> stockQuantity;
 	
 	@FXML 
-	private TableColumn<InventoryData, Double> productPrice;
+	private TableColumn<InventoryData, String> productPrice;
 	
 	@FXML
 	private TableView<InventoryData> saleTable;
@@ -42,7 +42,7 @@ public class SaleAddItemController {
 	private TableColumn<InventoryData, Integer> saleQuantity;
 	
 	@FXML 
-	private TableColumn<InventoryData, Double> salePrice;
+	private TableColumn<InventoryData, String> salePrice;
 	
 	@FXML
 	private Spinner<Integer> quantity;
@@ -74,7 +74,7 @@ public class SaleAddItemController {
 		}
 
 		productName.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
-		productPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
+		productPrice.setCellValueFactory(new PropertyValueFactory<>("PrintPrice"));
 		stockQuantity.setCellValueFactory(new PropertyValueFactory<>("StockQuantity"));
 		
 		inventoryTable.setItems(inventoryList);
@@ -82,7 +82,7 @@ public class SaleAddItemController {
 		
 		saleProduct.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		saleQuantity.setCellValueFactory(new PropertyValueFactory<>("SaleQuantity"));
-		salePrice.setCellValueFactory(new PropertyValueFactory<>("SaleTotal"));
+		salePrice.setCellValueFactory(new PropertyValueFactory<>("PrintSaleTotal"));
 		
 		saleTable.setItems(saleList);
 		saleTable.setEditable(true);

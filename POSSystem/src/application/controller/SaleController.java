@@ -42,7 +42,7 @@ public class SaleController {
 	private TableColumn<InventoryData, Integer> quantityColumn;
 	
 	@FXML
-	private TableColumn<InventoryData, Double> priceColumn;
+	private TableColumn<InventoryData, String> priceColumn;
 	
 	@FXML
 	private ObservableList<InventoryData> inventorySaleList;
@@ -55,7 +55,7 @@ public class SaleController {
 		
 		itemColumn.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("SaleQuantity"));
-		priceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<>("PrintSaleTotal"));
 		
 		tableData.setItems(inventorySaleList);
 		tableData.setEditable(true);
