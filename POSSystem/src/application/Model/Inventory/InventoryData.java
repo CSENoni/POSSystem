@@ -17,7 +17,7 @@ public class InventoryData implements Serializable {
 	private static AtomicInteger id_generator = new AtomicInteger(1); 
 	private int saleQuantity; //number of items in a sale
 	private double saleTotal; //total cost of item price x quantity
-	DecimalFormat decim = new DecimalFormat("#,##0.00");
+	private DecimalFormat decim = new DecimalFormat("#,##0.00");
 
 	
 	public InventoryData(String productName, String supplier, double price, int quantity, int threshold) {

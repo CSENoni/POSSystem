@@ -1,7 +1,10 @@
 package application.Model;
 
 import java.io.IOException;
+import java.util.List;
 
+import application.Model.Inventory.InventoryData;
+import application.Model.Inventory.InventoryUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,5 +20,19 @@ public class POSUtils {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
+	}
+	
+	public static void cleanOngoingSale() {
+		List<InventoryData> list = InventoryUtils.getAll();
+		
+		int idx = 0;
+		for(InventoryData item : list) {
+			if(item.isOnSale()) {
+				item.setStockQuantity(item.getStockQuantity() + item.getSaleQuantity());
+				item.setSaleQuantity(0);
+				InventoryUtils.update(idx, item);
+			}
+			idx++;
+		}
 	}
 }

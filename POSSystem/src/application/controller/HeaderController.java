@@ -16,10 +16,12 @@ public class HeaderController {
 	}
 	
 	public void toHome(ActionEvent event) throws IOException {
+		POSUtils.cleanOngoingSale();
 		POSUtils.changeScene(event, getClass(), "../view/Home.fxml");
 	}
 	
 	public void toLogin(ActionEvent event) throws IOException {
+		POSUtils.cleanOngoingSale();
 		POSUtils.changeScene(event, getClass(), "../view/Login.fxml");
 	}
 }
