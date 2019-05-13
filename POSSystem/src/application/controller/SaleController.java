@@ -2,7 +2,6 @@ package application.controller;
 
 import java.io.IOException;
 
-import application.Model.POSUtils;
 import application.Model.Inventory.InventoryData;
 import application.Model.Sale.SaleData;
 import javafx.collections.FXCollections;
@@ -10,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -86,7 +86,19 @@ public class SaleController {
 	}
 	
 	public void toCheckOut(ActionEvent event) throws IOException {
-		POSUtils.changeScene(event, getClass(), "../view/Checkout.fxml");
+		if(inventorySaleList != null && inventorySaleList.size() > 0) {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/Checkout.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			CheckoutController controller = fxmlLoader.getController();
+			controller.setSaleNumber(getSaleNumber());
+			controller.setTotalPrice(getSaleTotal());
+			
+			Scene scene = new Scene(root);
+			
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		}
 	}
 	
 	public String getSaleNumber() {
