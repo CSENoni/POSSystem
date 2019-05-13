@@ -21,17 +21,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="559.0" layoutY="155.0" mnemonicParsing="false" onAction="#toCancel" prefHeight="71.0" prefWidth="265.0" text="Cancel Sale">
+      <Button layoutX="524.0" layoutY="122.0" mnemonicParsing="false" onAction="#toCancel" prefHeight="71.0" prefWidth="265.0" text="Cancel Sale">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button layoutX="559.0" layoutY="265.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="265.0" text="Back">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Button>
-      <Button layoutX="559.0" layoutY="365.0" mnemonicParsing="false" onAction="#completeTransaction" prefHeight="71.0" prefWidth="265.0" text="Complete Sale">
+      <Button layoutX="524.0" layoutY="239.0" mnemonicParsing="false" onAction="#completeTransaction" prefHeight="71.0" prefWidth="265.0" text="Complete Sale">
          <font>
             <Font size="30.0" />
          </font>
