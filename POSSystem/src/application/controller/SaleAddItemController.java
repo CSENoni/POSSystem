@@ -54,6 +54,7 @@ public class SaleAddItemController {
 	private ObservableList<InventoryData> inventoryList;
 	private ObservableList<InventoryData> saleList = FXCollections.observableArrayList();
 	
+	private ObservableList<InventoryData> originalSaleList;
 	
 	@FXML
 	private void initialize() {
@@ -84,6 +85,10 @@ public class SaleAddItemController {
 				inventoryTable.getSelectionModel().clearSelection();
 			}
 		});
+	}
+	
+	public void setSaleTable(ObservableList<InventoryData> originalDataList) {
+		this.originalSaleList = originalDataList;
 	}
 	
 	public void addItemToSale() {
@@ -137,5 +142,16 @@ public class SaleAddItemController {
 	public void cancelAddingItems(ActionEvent event) {
 		Stage stage = (Stage) cancelButton.getScene().getWindow();
 		stage.close();
+	}
+	
+	public void confirmSale(ActionEvent event) {
+		if(saleList != null && originalSaleList != null) {
+			if(originalSaleList.size() == 0) {
+				originalSaleList.addAll(saleList);
+			}else {
+				originalSaleList.setAll(saleList);
+			}
+		}
+		cancelAddingItems(event);
 	}
 }
