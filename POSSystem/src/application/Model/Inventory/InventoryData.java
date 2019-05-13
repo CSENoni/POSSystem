@@ -94,7 +94,7 @@ public class InventoryData implements Serializable {
 		this.saleQuantity = number;
 		this.saleTotal = number * this.price;
 	}
-	public int getSaleQuantity(int number) {
+	public int getSaleQuantity() {
 		return this.saleQuantity;
 	}
 	
