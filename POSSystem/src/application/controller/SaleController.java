@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -60,10 +61,6 @@ public class SaleController {
 		tableData.setItems(inventorySaleList);
 		tableData.setEditable(true);
 		
-		newSale.editSaleItems(inventorySaleList);
-		saleNumber.setText(this.getSaleNumber());
-		totalPrice.setText(this.getSaleTotal());
-		
 	}
 	
 	public void addAndEditItem(ActionEvent event) {
@@ -80,6 +77,12 @@ public class SaleController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void updateSale(MouseEvent event) {
+		newSale.editSaleItems(inventorySaleList);
+		saleNumber.setText(this.getSaleNumber());
+		totalPrice.setText(this.getSaleTotal());
 	}
 	
 	public void toCheckOut(ActionEvent event) throws IOException {
