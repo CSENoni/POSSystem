@@ -22,25 +22,25 @@ public class SaleAddItemController {
 	private TableView<InventoryData> inventoryTable;
 	
 	@FXML 
-	private TableColumn productName;
+	private TableColumn<InventoryData, String> productName;
 	
 	@FXML 
-	private TableColumn stockQuantity;
+	private TableColumn<InventoryData, Integer> stockQuantity;
 	
 	@FXML 
-	private TableColumn productPrice;
+	private TableColumn<InventoryData, Double> productPrice;
 	
 	@FXML
 	private TableView<InventoryData> saleTable;
 	
 	@FXML 
-	private TableColumn saleProduct;
+	private TableColumn<InventoryData, String> saleProduct;
 	
 	@FXML 
-	private TableColumn saleQuantity;
+	private TableColumn<InventoryData, Integer> saleQuantity;
 	
 	@FXML 
-	private TableColumn salePrice;
+	private TableColumn<InventoryData, Double> salePrice;
 	
 	@FXML
 	private Spinner<Integer> quantity;
@@ -57,7 +57,7 @@ public class SaleAddItemController {
 	
 	@FXML
 	private void initialize() {
-		initSpinner();
+//		initSpinner(1);
 		inventoryList = FXCollections.observableArrayList();
 
 		List<InventoryData> list = InventoryUtils.getAll();
@@ -70,39 +70,64 @@ public class SaleAddItemController {
 		
 		inventoryTable.setItems(inventoryList);
 		inventoryTable.setEditable(true);
+		
+		inventoryTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if(newSelection != null) {
+				initSpinner(newSelection.getStockQuantity());
+				saleTable.getSelectionModel().clearSelection();
+			}
+		});
+		
+		saleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if(newSelection != null) {
+				initSpinner(newSelection.getSaleQuantity());
+				inventoryTable.getSelectionModel().clearSelection();
+			}
+		});
 	}
 	
 	public void addItemToSale() {
 		InventoryData item = inventoryTable.getSelectionModel().getSelectedItem();
-		if (!saleList.contains(item)) {
-			item.setSaleQuantity(quantity.getValue());
-			saleList.add(item);
+		if(item != null) {
+			if (!saleList.contains(item)) {
+				item.setSaleQuantity(quantity.getValue());
+				saleList.add(item);
+			}
+			else {
+				item.setSaleQuantity(item.getSaleQuantity() + quantity.getValue());
+				saleList.set(saleList.indexOf(item), item);
+			}
+			item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
+			inventoryList.set(inventoryList.indexOf(item), item);
+			
+			saleProduct.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
+			saleQuantity.setCellValueFactory(new PropertyValueFactory<>("SaleQuantity"));
+			salePrice.setCellValueFactory(new PropertyValueFactory<>("SaleTotal"));
+			
+			saleTable.setItems(saleList);
+			saleTable.setEditable(true);
 		}
-		else {
-			item.setSaleQuantity(item.getSaleQuantity() + quantity.getValue());
-			saleList.set(saleList.indexOf(item), item);
-		}
-		
-		saleProduct.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
-		saleQuantity.setCellValueFactory(new PropertyValueFactory<>("SaleQuantity"));
-		salePrice.setCellValueFactory(new PropertyValueFactory<>("SaleTotal"));
-		
-		saleTable.setItems(saleList);
-		saleTable.setEditable(true);
 	}
 	
 	public void removeItemFromSale() {
 		InventoryData item = saleTable.getSelectionModel().getSelectedItem();
-		if (this.getQuantity() >= item.getSaleQuantity())
-			saleList.remove(item);
-		else {
-			item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
-			saleList.set(saleList.indexOf(item), item);
+		if(item != null) {
+			if (this.getQuantity() >= item.getSaleQuantity()) {
+				item.setStockQuantity(item.getStockQuantity() + item.getSaleQuantity());
+				item.setSaleQuantity(0);
+				saleList.remove(item);
+			}else {
+				item.setStockQuantity(item.getStockQuantity() + quantity.getValue());
+				item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
+				saleList.set(saleList.indexOf(item), item);
+			}
+			inventoryList.set(inventoryList.indexOf(item), item);
 		}
 	}
 	
-	private void initSpinner() {
-        quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99));
+	private void initSpinner(int stockQuantity) {
+		// Restrict the quantity to add to the sale
+        quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, stockQuantity));
     }
 	
 	public int getQuantity() {
@@ -113,6 +138,4 @@ public class SaleAddItemController {
 		Stage stage = (Stage) cancelButton.getScene().getWindow();
 		stage.close();
 	}
-	
-	
 }
