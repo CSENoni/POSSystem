@@ -80,12 +80,7 @@ public class InventoryUtils {
 		List<InventoryData> datas = getAll();
 		
 		if(datas != null) {
-			datas.get(pos).setProductName(data.getProductName());
-			datas.get(pos).setSupplier(data.getSupplier());
-			datas.get(pos).setPrice(data.getPrice());
-			datas.get(pos).setStockQuantity(data.getStockQuantity());
-			datas.get(pos).setThreshold(data.getThreshold());
-			
+			datas.set(pos, data);
 			try {
 				FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "Inventory.txt"));
 				ObjectOutputStream o = new ObjectOutputStream(fs);

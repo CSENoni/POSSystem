@@ -1,6 +1,8 @@
 package application.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import application.Model.Inventory.InventoryData;
 import application.Model.Inventory.InventoryUtils;
@@ -55,15 +57,21 @@ public class SaleAddItemController {
 	private ObservableList<InventoryData> saleList = FXCollections.observableArrayList();
 	
 	private ObservableList<InventoryData> originalSaleList;
+	private Set<Integer> changedItemPos;
 	
 	@FXML
 	private void initialize() {
 //		initSpinner(1);
+		changedItemPos = new HashSet<Integer>();
 		inventoryList = FXCollections.observableArrayList();
 
 		List<InventoryData> list = InventoryUtils.getAll();
-		if (list != null)
+		if (list != null) {
 			inventoryList.addAll(list);
+			for(InventoryData item : list) {
+				if(item.isOnSale()) saleList.add(item);
+			}
+		}
 
 		productName.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		productPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
@@ -71,6 +79,13 @@ public class SaleAddItemController {
 		
 		inventoryTable.setItems(inventoryList);
 		inventoryTable.setEditable(true);
+		
+		saleProduct.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
+		saleQuantity.setCellValueFactory(new PropertyValueFactory<>("SaleQuantity"));
+		salePrice.setCellValueFactory(new PropertyValueFactory<>("SaleTotal"));
+		
+		saleTable.setItems(saleList);
+		saleTable.setEditable(true);
 		
 		inventoryTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if(newSelection != null) {
@@ -103,14 +118,9 @@ public class SaleAddItemController {
 				saleList.set(saleList.indexOf(item), item);
 			}
 			item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
-			inventoryList.set(inventoryList.indexOf(item), item);
-			
-			saleProduct.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
-			saleQuantity.setCellValueFactory(new PropertyValueFactory<>("SaleQuantity"));
-			salePrice.setCellValueFactory(new PropertyValueFactory<>("SaleTotal"));
-			
-			saleTable.setItems(saleList);
-			saleTable.setEditable(true);
+			int idx = inventoryList.indexOf(item);
+			inventoryList.set(idx, item);
+			changedItemPos.add(idx);
 		}
 	}
 	
@@ -126,7 +136,9 @@ public class SaleAddItemController {
 				item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
 				saleList.set(saleList.indexOf(item), item);
 			}
-			inventoryList.set(inventoryList.indexOf(item), item);
+			int idx = inventoryList.indexOf(item);
+			inventoryList.set(idx, item);
+			changedItemPos.add(idx);
 		}
 	}
 	
@@ -150,6 +162,10 @@ public class SaleAddItemController {
 				originalSaleList.addAll(saleList);
 			}else {
 				originalSaleList.setAll(saleList);
+			}
+			
+			for(int idx : changedItemPos) {
+				InventoryUtils.update(idx, inventoryList.get(idx));
 			}
 		}
 		cancelAddingItems(event);

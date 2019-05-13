@@ -102,4 +102,8 @@ public class InventoryData implements Serializable {
 		return this.saleTotal;
 	}
 	
+	public boolean isOnSale() {
+		return this.saleQuantity > 0;
+	}
+	
 }
