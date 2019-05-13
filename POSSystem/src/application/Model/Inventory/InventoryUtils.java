@@ -56,6 +56,7 @@ public class InventoryUtils {
 		List<InventoryData> datas = getAll();
 		
 		if(datas != null) {
+			
 			for(InventoryData item : datas) {
 				if(item.getProductId() == data.getProductId() && item.getProductName().equals(data.getProductName()) 
 						&& item.getSupplier().equals(data.getSupplier())) {
