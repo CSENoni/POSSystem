@@ -3,6 +3,7 @@ package application.controller;
 import java.io.IOException;
 
 import application.Model.POSUtils;
+import application.Model.Sale.SaleData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +15,22 @@ import javafx.stage.Stage;
 
 public class SaleController {
 	
+	private SaleData newSale = new SaleData();
+	
 	@FXML
 	private HeaderController headerViewController;
 	
 	@FXML
-	private Text saleName;
+	private Text saleNumber;
+	
+	@FXML
+	private Text totalPrice;
 	
 	@FXML
 	private void initialize() {
 		headerViewController.setTitle("SALE");
+		saleNumber.setText(this.getSaleNumber());
+		totalPrice.setText(this.getSaleTotal());
 	}
 	
 	public void addAndEditItem(ActionEvent event) {
@@ -42,5 +50,12 @@ public class SaleController {
 	
 	public void toCheckOut(ActionEvent event) throws IOException {
 		POSUtils.changeScene(event, getClass(), "../view/Checkout.fxml");
+	}
+	
+	public String getSaleNumber() {
+		return Integer.toString(newSale.getSaleNumber());
+	}
+	public String getSaleTotal() {
+		return newSale.printSaleTotal();
 	}
 }

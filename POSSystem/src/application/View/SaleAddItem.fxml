@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SaleAddItemController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SaleAddItemController">
    <top>
       <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
          <children>
@@ -36,12 +36,12 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" text="&gt;&gt;&gt;">
+            <Button mnemonicParsing="false" onAction="#addItemToSale" prefHeight="37.0" prefWidth="70.0" text="&gt;&gt;&gt;">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Spinner editable="true" prefHeight="26.0" prefWidth="70.0" />
+            <Spinner fx:id="quantity" editable="true" prefHeight="26.0" prefWidth="70.0"/>
             <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" text="&lt;&lt;&lt;">
                <font>
                   <Font size="20.0" />
@@ -53,11 +53,11 @@
    <left>
       <ScrollPane prefHeight="373.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <content>
-            <TableView prefHeight="371.0" prefWidth="298.0">
+            <TableView fx:id="inventoryTable" prefHeight="371.0" prefWidth="298.0">
               <columns>
-                <TableColumn prefWidth="101.5999790430069" text="Item" />
-                  <TableColumn prefWidth="111.20001220703125" text="Supplier" />
-                <TableColumn prefWidth="113.60002136230469" text="Quantity" />
+                <TableColumn fx:id="productName" prefWidth="101.5999790430069" text="Product Name" />
+                  <TableColumn fx:id="stockQuantity" prefWidth="111.20001220703125" text="Stock Quantity" />
+                <TableColumn fx:id="productPrice" prefWidth="83.0" text="Price" />
               </columns>
             </TableView>
          </content>
@@ -66,11 +66,11 @@
    <right>
       <ScrollPane prefHeight="373.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <content>
-            <TableView prefHeight="370.0" prefWidth="299.0">
+            <TableView fx:id="saleTable" prefHeight="369.0" prefWidth="296.0">
                <columns>
-                  <TableColumn prefWidth="86.39996337890625" text="Item" />
-                  <TableColumn prefWidth="114.39996337890625" text="Supplier" />
-                  <TableColumn prefWidth="114.0" text="Quantity" />
+                  <TableColumn fx:id="saleProduct" prefWidth="109.0" text="Product Name" />
+                  <TableColumn fx:id="saleQuantity" prefWidth="110.0" text="Sale Quantity" />
+                  <TableColumn fx:id="salePrice" prefWidth="97.0" text="Price" />
                </columns>
             </TableView>
          </content>

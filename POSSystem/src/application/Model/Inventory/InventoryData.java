@@ -14,6 +14,8 @@ public class InventoryData implements Serializable {
 	private int outstandingOrder; // number of quantity in pending orders
 	private int threshold;
 	private static AtomicInteger id_generator = new AtomicInteger(1); 
+	private int saleQuantity; //number of items in a sale
+	private double saleTotal; //total cost of item price x quantity
 	
 	public InventoryData(String productName, String supplier, double price, int quantity, int threshold) {
 		this.productId = id_generator.getAndIncrement();
@@ -87,4 +89,17 @@ public class InventoryData implements Serializable {
 	public void setThreshold(int threshold) {
 		this.threshold = threshold;
 	}
+	
+	public void setSaleQuantity(int number) {
+		this.saleQuantity = number;
+		this.saleTotal = number * this.price;
+	}
+	public int getSaleQuantity(int number) {
+		return this.saleQuantity;
+	}
+	
+	public double getSaleTotal() {
+		return this.saleTotal;
+	}
+	
 }
