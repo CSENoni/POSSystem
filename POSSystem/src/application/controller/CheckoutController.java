@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import application.Model.POSUtils;
 import javafx.event.ActionEvent;
@@ -27,7 +28,9 @@ public class CheckoutController {
 
 	@FXML
 	private Text totalChange;
-
+	
+	private DecimalFormat decim = new DecimalFormat("#,##0.00");
+	
 	@FXML
 	private void initialize() {
 		headerViewController.setTitle("CHECKOUT");
@@ -54,14 +57,14 @@ public class CheckoutController {
 			double amount = price - paid;
 
 			if (amount > 0) {
-				totalDue.setText(String.valueOf(amount));
-				totalChange.setText(String.valueOf(0.0));
+				totalDue.setText(decim.format(amount));
+				totalChange.setText(decim.format(0.0));
 			} else if (amount < 0) {
-				totalDue.setText(String.valueOf(0.0));
-				totalChange.setText(String.valueOf(Math.abs(amount)));
+				totalDue.setText(decim.format(0.0));
+				totalChange.setText(decim.format(Math.abs(amount)));
 			} else {
-				totalDue.setText(String.valueOf(0.0));
-				totalChange.setText(String.valueOf(0.0));
+				totalDue.setText(decim.format(0.0));
+				totalChange.setText(decim.format(0.0));
 			}
 		} else {
 			totalDue.setText("");
