@@ -46,7 +46,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="totalPaid" layoutX="182.0" layoutY="214.0" prefHeight="25.0" prefWidth="187.0" />
+      <TextField fx:id="totalPaid" layoutX="182.0" layoutY="214.0" onKeyReleased="#calculateDueAndChange" prefHeight="25.0" prefWidth="187.0" />
       <Line endX="98.80001831054688" layoutX="276.0" layoutY="262.0" startX="-100.0" />
       <Label layoutX="33.0" layoutY="262.0" prefHeight="71.0" prefWidth="68.0" text="Due: ">
          <font>

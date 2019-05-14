@@ -6,6 +6,7 @@ import application.Model.POSUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 public class CheckoutController {
@@ -25,8 +26,12 @@ public class CheckoutController {
 	private Text totalDue;
 	
 	@FXML
+	private Text totalChange;
+	
+	@FXML
 	private void initialize() {
 		headerViewController.setTitle("CHECKOUT");
+		totalPaid.setText(String.valueOf(0.0));
 	}
 	
 	public void setSaleNumber(String saleNumber) {
@@ -35,6 +40,29 @@ public class CheckoutController {
 	
 	public void setTotalPrice(String totalPrice) {
 		this.totalPrice.setText(totalPrice);
+	}
+	
+	public void calculateDueAndChange(KeyEvent event) {
+		String input = this.totalPaid.getText();
+		if(input != null && input.length() > 0) {
+			double price = Double.parseDouble(this.totalPrice.getText());
+			double paid = Double.parseDouble(input);
+			double amount = price - paid;
+
+			if(amount > 0) {
+				totalDue.setText(String.valueOf(amount));
+				totalChange.setText(String.valueOf(0.0));
+			}else if(amount < 0) {
+				totalDue.setText(String.valueOf(0.0));
+				totalChange.setText(String.valueOf(Math.abs(amount)));
+			}else {
+				totalDue.setText(String.valueOf(0.0));
+				totalChange.setText(String.valueOf(0.0));
+			}
+		}else {
+			totalDue.setText("");
+			totalChange.setText("");
+		}
 	}
 	
 	public void completeTransaction(ActionEvent event) throws IOException {
