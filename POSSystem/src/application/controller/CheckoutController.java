@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import application.Model.POSUtils;
+import application.Model.Inventory.InventoryData;
+import application.Model.Inventory.InventoryUtils;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -31,6 +34,8 @@ public class CheckoutController {
 	
 	private DecimalFormat decim = new DecimalFormat("#,##0.00");
 	
+	private ObservableList<InventoryData> saleList;
+	
 	@FXML
 	private void initialize() {
 		headerViewController.setTitle("CHECKOUT");
@@ -43,6 +48,10 @@ public class CheckoutController {
 
 	public void setTotalPrice(String totalPrice) {
 		this.totalPrice.setText(totalPrice);
+	}
+	
+	public void setSaleList(ObservableList<InventoryData> saleList) {
+		this.saleList = saleList;
 	}
 	
 	public void inputPaidValidation(KeyEvent event) {
@@ -75,7 +84,14 @@ public class CheckoutController {
 	public void completeTransaction(ActionEvent event) throws IOException {
 		if(totalDue != null && totalDue.getText().length() > 0) {
 			double due = Double.parseDouble(totalDue.getText());
-			if(due == 0) POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml"); 
+			if(due == 0) {
+				for(InventoryData item : saleList) {
+					item.setOutstandingOrder(item.getOutstandingOrder() + item.getSaleQuantity());
+					item.setSaleQuantity(0);
+					InventoryUtils.update(item);
+				}
+				POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml"); 
+			}
 		}
 	}
 

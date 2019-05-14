@@ -73,20 +73,8 @@ public class InventoryData implements Serializable {
 		return outstandingOrder;
 	}
 	
-	public void addOutstandingOrder(int quantity) {
-		this.outstandingOrder += quantity;
-	}
-	
-	public void removeOutstandingOrder(int quantity) {
-		this.outstandingOrder -= quantity;
-	}
-	
-	public void addProduct(int quantity) { //after replenishing the inventory or a return
-		this.stockQuantity += quantity;
-	}
-	
-	public void removeProduct(int quantity) { //after a customer makes a purchase
-		this.stockQuantity -= quantity;
+	public void setOutstandingOrder(int quantity) {
+		this.outstandingOrder = quantity;
 	}
 	
 	public int getThreshold() {

@@ -95,6 +95,7 @@ public class SaleController {
 			CheckoutController controller = fxmlLoader.getController();
 			controller.setSaleNumber(getSaleNumber());
 			controller.setTotalPrice(getSaleTotal());
+			controller.setSaleList(inventorySaleList);
 			
 			Scene scene = new Scene(root);
 			

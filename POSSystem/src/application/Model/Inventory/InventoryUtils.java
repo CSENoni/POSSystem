@@ -76,6 +76,32 @@ public class InventoryUtils {
 			}
 		}
 	}
+	public static void update(InventoryData data) {
+		List<InventoryData> datas = getAll();
+		
+		if(datas != null) {
+			int idx = 0;
+			for(InventoryData item : datas) {
+				if(item.getProductId() == data.getProductId() && 
+						item.getProductName().equals(data.getProductName())) {
+					datas.set(idx, data);
+				}
+				idx++;
+			}
+			
+			try {
+				FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "Inventory.txt"));
+				ObjectOutputStream o = new ObjectOutputStream(fs);
+				
+				o.writeObject(datas);
+				o.close();
+				fs.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	public static void update(int pos, InventoryData data) {
 		List<InventoryData> datas = getAll();
