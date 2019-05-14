@@ -108,6 +108,6 @@ public class SaleController {
 		return Integer.toString(newSale.getSaleNumber());
 	}
 	public String getSaleTotal() {
-		return newSale.printSaleTotal();
+		return newSale.getPrintSaleTotal();
 	}
 }

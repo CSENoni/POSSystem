@@ -19,10 +19,16 @@ public class CashierReportController {
 	private TableView<SaleData> tableData;
 	
 	@FXML
+	private TableColumn<SaleData, Integer> cashierColumn;
+	
+	@FXML
+	private TableColumn<SaleData, Integer> registerColumn;
+	
+	@FXML
 	private TableColumn<SaleData, Integer> saleIDColumn;
 	
 	@FXML
-	private TableColumn<SaleData, Integer> cashierColumn;
+	private TableColumn<SaleData, String> saleDateColumn;
 	
 	@FXML
 	private TableColumn<SaleData, Integer> itemColumn;
@@ -39,13 +45,14 @@ public class CashierReportController {
 		saleData = FXCollections.observableArrayList();
 		
 		List<SaleData> list = SaleUtils.getAll();
-		if (list != null)
+		if (list != null) {
 			saleData.addAll(list);
+		}
 		
-		saleIDColumn.setCellValueFactory(new PropertyValueFactory<>("SaleNumber"));
-		cashierColumn.setCellValueFactory(new PropertyValueFactory<>("User"));
-		itemColumn.setCellValueFactory(new PropertyValueFactory<>("NumberOfItems"));
-		totalColumn.setCellValueFactory(new PropertyValueFactory<>("PrintSaleTotal"));
+		saleIDColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("SaleNumber"));
+		saleDateColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("SaleTime"));
+		itemColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("numItems"));
+		totalColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("printSaleTotal"));
 		
 		tableData.setItems(saleData);
 		tableData.setEditable(true);

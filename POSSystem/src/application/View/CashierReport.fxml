@@ -11,10 +11,12 @@
    <center>
       <TableView fx:id="tableData" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="saleIDColumn" prefWidth="208.0" text="Sale ID" />
-          <TableColumn fx:id="cashierColumn" prefWidth="220.0" text="Cashier" />
-            <TableColumn fx:id="itemColumn" prefWidth="191.0" text="Total # of Items" />
-            <TableColumn fx:id="totalColumn" prefWidth="280.0" text="Total Price" />
+            <TableColumn fx:id="cashierColumn" prefWidth="99.99998474121094" text="Cashier ID" />
+            <TableColumn fx:id="registerColumn" prefWidth="97.0" text="Register ID" />
+          <TableColumn fx:id="saleIDColumn" prefWidth="131.0" text="Sale ID" />
+          <TableColumn fx:id="saleDateColumn" prefWidth="195.0" text="Sale Date" />
+            <TableColumn fx:id="itemColumn" prefWidth="188.0" text="Total # of Sale Items" />
+            <TableColumn fx:id="totalColumn" prefWidth="181.0" text="Total Price of Sale" />
         </columns>
       </TableView>
    </center>
