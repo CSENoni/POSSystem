@@ -70,11 +70,14 @@ public class CheckoutController {
 	}
 	
 	public void completeTransaction(ActionEvent event) throws IOException {
-		POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml");
+		if(totalDue != null && totalDue.getText().length() > 0) {
+			double due = Double.parseDouble(totalDue.getText());
+			if(due == 0) POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml"); 
+		}
 	}
 
 	public void toCancel(ActionEvent event) throws IOException {
-		POSUtils.changeScene(event, getClass(), "../view/SaleCancel.fxml");
+		headerViewController.toHome(event);
 	}
 
 	private boolean isDouble(String value) {
