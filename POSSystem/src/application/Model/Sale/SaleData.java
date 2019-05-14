@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import application.Model.Inventory.InventoryData;
 import application.Model.Register.RegisterData;
 import application.Model.User.UserData;
@@ -17,8 +15,7 @@ import javafx.collections.ObservableList;
 public class SaleData implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private int saleNumber;
-	private static AtomicInteger saleGen = new AtomicInteger(1);
+	private long saleNumber;
 	private String saleTime;
 	private double saleTotal = 0.0;
 	private UserData user;
@@ -29,14 +26,14 @@ public class SaleData implements Serializable{
 	
 	
 	public SaleData() {
-		this.saleNumber = saleGen.getAndIncrement();
-		DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
+		this.saleNumber = genSaleID();
+		DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
 		Date date = new Date();
 		this.saleTime = dateFormat.format(date);
 	}
 	
 	//Getters
-	public int getSaleNumber() {
+	public long getSaleNumber() {
 		return this.saleNumber;
 	}
 	public String getSaleTime() {
@@ -75,6 +72,13 @@ public class SaleData implements Serializable{
 		}
 	}
 	
+	//Generate unique sale id
+	public long genSaleID() {
+	        Date time = new Date();
+	        SimpleDateFormat genID = new SimpleDateFormat("yyMMddhhmmssMs");
+	        String saleID = genID.format(time);
+	        return Long.parseLong(saleID);
+	    }
 	
 	//Cancel a Sale
 	public void cancelSale() {

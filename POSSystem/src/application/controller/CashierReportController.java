@@ -25,7 +25,7 @@ public class CashierReportController {
 	private TableColumn<SaleData, Integer> registerColumn;
 	
 	@FXML
-	private TableColumn<SaleData, Integer> saleIDColumn;
+	private TableColumn<SaleData, Long> saleIDColumn;
 	
 	@FXML
 	private TableColumn<SaleData, String> saleDateColumn;
@@ -49,7 +49,7 @@ public class CashierReportController {
 			saleData.addAll(list);
 		}
 		
-		saleIDColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("SaleNumber"));
+		saleIDColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Long>("SaleNumber"));
 		saleDateColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("SaleTime"));
 		itemColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("numItems"));
 		totalColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("printSaleTotal"));
