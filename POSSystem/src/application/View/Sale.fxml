@@ -28,7 +28,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="533.0" layoutY="409.0" prefHeight="35.0" prefWidth="100.0" text="Total:  $">
+      <Label alignment="TOP_LEFT" layoutX="533.0" layoutY="409.0" prefHeight="35.0" prefWidth="82.0" text="Total: ">
          <font>
             <Font size="24.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="totalPrice" layoutX="631.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.2734375">
+      <Text fx:id="totalPrice" layoutX="615.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.2734375">
          <font>
             <Font size="24.0" />
          </font>

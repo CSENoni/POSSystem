@@ -23,6 +23,8 @@ public class SaleData implements Serializable{
 	private ArrayList<InventoryData> items = new ArrayList<InventoryData>();
 	DecimalFormat decim = new DecimalFormat("#,##0.00");
 	private int numItems;	//Total number of items in a sale
+	private double paid;
+	private double change;
 	
 	
 	public SaleData() {
@@ -50,7 +52,31 @@ public class SaleData implements Serializable{
 	}
 	
 	public String getPrintSaleTotal() {
-		return decim.format(this.saleTotal);
+		return "$" + decim.format(this.saleTotal);
+	}
+	
+	public void setPaid(double payment) {
+		this.paid = payment;
+	}
+	
+	public double getPaid() {
+		return this.paid;
+	}
+	
+	public String getPrintPaid() {
+		return "$" + decim.format(this.paid);
+	}
+	
+	public void setChange(double amount) {
+		this.change = amount;
+	}
+	
+	public double getChange() {
+		return this.change;
+	}
+	
+	public String getPrintChange() {
+		return "$" + decim.format(this.change);
 	}
 	
 	//get the number of items in a sale

@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import application.Model.POSUtils;
 import application.Model.Inventory.InventoryData;
 import application.Model.Inventory.InventoryUtils;
+import application.Model.Sale.SaleData;
+import application.Model.Sale.SaleUtils;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 public class CheckoutController {
+	private SaleData newSale;
+	
 	@FXML
 	private HeaderController headerViewController;
 
@@ -50,6 +54,10 @@ public class CheckoutController {
 		this.totalPrice.setText(totalPrice);
 	}
 	
+	public void sendSale(SaleData sale) {
+		this.newSale = sale;
+	}
+	
 	public void setSaleList(ObservableList<InventoryData> saleList) {
 		this.saleList = saleList;
 	}
@@ -61,7 +69,7 @@ public class CheckoutController {
 	public void calculateDueAndChange(KeyEvent event) {
 		String input = this.totalPaid.getText();
 		if (input != null && input.length() > 0) {
-			double price = Double.parseDouble(this.totalPrice.getText());
+			double price = newSale.getSaleTotal();
 			double paid = Double.parseDouble(input);
 			double amount = price - paid;
 
@@ -90,6 +98,10 @@ public class CheckoutController {
 					item.setSaleQuantity(0);
 					InventoryUtils.update(item);
 				}
+				this.newSale.setPaid(Double.parseDouble(totalPaid.getText()));
+				this.newSale.setChange(Double.parseDouble(totalChange.getText()));
+				SaleUtils.writeSale(this.newSale);
+				
 				POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml"); 
 			}
 		}

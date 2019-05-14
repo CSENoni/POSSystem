@@ -36,6 +36,12 @@ public class CashierReportController {
 	@FXML
 	private TableColumn<SaleData, String> totalColumn;
 	
+	@FXML
+	private TableColumn<SaleData, Double> paidColumn;
+	
+	@FXML
+	private TableColumn<SaleData, Double> changeColumn;
+	
 	private ObservableList<SaleData> saleData;
 
 	
@@ -53,6 +59,8 @@ public class CashierReportController {
 		saleDateColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("SaleTime"));
 		itemColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("numItems"));
 		totalColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("printSaleTotal"));
+		paidColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Double>("PrintPaid"));
+		changeColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Double>("PrintChange"));
 		
 		tableData.setItems(saleData);
 		tableData.setEditable(true);
