@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CashierReportController">
 	<top>
 		<fx:include fx:id="headerView" source="Header.fxml" />
 	</top>
+   <center>
+      <TableView fx:id="tableData" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="saleIDColumn" prefWidth="208.0" text="Sale ID" />
+          <TableColumn fx:id="cashierColumn" prefWidth="220.0" text="Cashier" />
+            <TableColumn fx:id="itemColumn" prefWidth="191.0" text="Total # of Items" />
+            <TableColumn fx:id="totalColumn" prefWidth="280.0" text="Total Price" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>
