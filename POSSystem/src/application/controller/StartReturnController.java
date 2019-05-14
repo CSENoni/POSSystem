@@ -3,11 +3,21 @@
 package application.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import application.Model.POSUtils;
+import application.Model.Sale.SaleData;
+import application.Model.Sale.SaleUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class StartReturnController {
 
@@ -15,14 +25,41 @@ public class StartReturnController {
 	private HeaderController headerViewController;
 	
 	@FXML
-	private void initialize() {
-		headerViewController.setTitle("RETURN");
-	}
-	
-	@FXML
 	private TextField saleNumber;
 	
-	public void toReturns(ActionEvent event) throws IOException {
-		POSUtils.changeScene(event, getClass(), "../view/Return.fxml");
+	private ObservableList<SaleData> saleData;
+	SaleData returnSale;
+
+	
+	@FXML
+	private void initialize() {
+		headerViewController.setTitle("RETURN");
+		saleData = FXCollections.observableArrayList();
+		
+		List<SaleData> list = SaleUtils.getAll();
+		if (list != null) {
+			saleData.addAll(list);
+		}
+		
 	}
+	
+	public void toReturn(ActionEvent event) throws IOException {
+		long saleNum = Long.parseLong(saleNumber.getText());
+			for (SaleData sale : saleData) {
+				if (saleNum == sale.getSaleNumber());
+					this.returnSale = sale;
+			}
+		
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/Return.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			ReturnController controller = fxmlLoader.getController();
+			controller.sendSale(this.returnSale);
+			
+			Scene scene = new Scene(root);
+			
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		}
+	
 }

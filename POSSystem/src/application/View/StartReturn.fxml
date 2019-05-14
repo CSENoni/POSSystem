@@ -15,12 +15,7 @@
          </font>
       </Label>
       <TextField fx:id="saleNumber" layoutX="389.0" layoutY="177.0" prefHeight="50.0" prefWidth="317.0" promptText="Enter Sale Number" />
-      <Button layoutX="343.0" layoutY="283.0" mnemonicParsing="false" onAction="#toReturns" prefHeight="50.0" prefWidth="215.0" text="Return Item">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button layoutX="343.0" layoutY="354.0" mnemonicParsing="false" onAction="#toReturns" prefHeight="50.0" prefWidth="215.0" text="Return All">
+      <Button layoutX="343.0" layoutY="300.0" mnemonicParsing="false" onAction="#toReturn" prefHeight="50.0" prefWidth="215.0" text="Return Items">
          <font>
             <Font size="24.0" />
          </font>
