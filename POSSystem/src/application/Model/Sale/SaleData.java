@@ -1,5 +1,6 @@
 package application.Model.Sale;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -13,8 +14,9 @@ import application.Model.Register.RegisterData;
 import application.Model.User.UserData;
 import javafx.collections.ObservableList;
 
-public class SaleData {
+public class SaleData implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int saleNumber;
 	private static AtomicInteger saleGen = new AtomicInteger(1);
 	private String saleTime;
@@ -51,6 +53,14 @@ public class SaleData {
 	
 	public String printSaleTotal() {
 		return decim.format(this.saleTotal);
+	}
+	
+	public int getNumberOfItems() {
+		int numberOfItems = 0;
+		for (InventoryData item : this.items) {
+			numberOfItems = numberOfItems + item.getSaleQuantity();
+		}
+		return numberOfItems;
 	}
 	
 	//Adding and Removing items from a sale

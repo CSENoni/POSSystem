@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import application.Model.Inventory.InventoryData;
 import application.Model.Sale.SaleData;
+import application.Model.Sale.SaleUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -86,6 +87,8 @@ public class SaleController {
 	}
 	
 	public void toCheckOut(ActionEvent event) throws IOException {
+		SaleUtils.writeSale(this.newSale);
+		
 		if(inventorySaleList != null && inventorySaleList.size() > 0) {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/Checkout.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
