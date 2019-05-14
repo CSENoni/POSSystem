@@ -1,3 +1,5 @@
+// enables second screen
+
 package application.controller;
 
 import javafx.fxml.FXML;

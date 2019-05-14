@@ -20,7 +20,7 @@ public class HomeController {
 	}
 	
 	public void toReturn(ActionEvent event) throws IOException {
-		POSUtils.changeScene(event, getClass(), "../view/StartReturn.fxml");
+		POSUtils.changeScene(event, getClass(), "../view/Return.fxml");
 	}
 	
 	public void toInventory(ActionEvent event) throws IOException {

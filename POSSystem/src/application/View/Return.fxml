@@ -93,9 +93,9 @@
       <Button layoutX="657.0" layoutY="173.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="185.0" text="Remove Item">
          <font>
             <Font size="24.0" />
-         </font>
+       </font>
       </Button>
-      <Label fx:id="saleNumber" alignment="TOP_LEFT" layoutX="33.0" layoutY="103.0" prefHeight="32.0" prefWidth="400.0" text="Sale Number: ">
+     <Label fx:id="saleNumber" alignment="TOP_LEFT" layoutX="33.0" layoutY="103.0" prefHeight="32.0" prefWidth="400.0" text="Sale Number: ">
          <font>
             <Font size="24.0" />
          </font>
