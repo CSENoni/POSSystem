@@ -106,9 +106,9 @@ public class SaleController {
 	}
 	
 	public String getSaleNumber() {
-		return Integer.toString(newSale.getSaleNumber());
+		return Long.toString(newSale.getSaleNumber());
 	}
 	public String getSaleTotal() {
-		return newSale.printSaleTotal();
+		return newSale.getPrintSaleTotal();
 	}
 }

@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import application.Model.Inventory.InventoryData;
 import application.Model.Register.RegisterData;
 import application.Model.User.UserData;
@@ -17,25 +15,25 @@ import javafx.collections.ObservableList;
 public class SaleData implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private int saleNumber;
-	private static AtomicInteger saleGen = new AtomicInteger(1);
+	private long saleNumber;
 	private String saleTime;
 	private double saleTotal = 0.0;
 	private UserData user;
 	private RegisterData register;
 	private ArrayList<InventoryData> items = new ArrayList<InventoryData>();
 	DecimalFormat decim = new DecimalFormat("#,##0.00");
+	private int numItems;	//Total number of items in a sale
 	
 	
 	public SaleData() {
-		this.saleNumber = saleGen.getAndIncrement();
-		DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
+		this.saleNumber = genSaleID();
+		DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
 		Date date = new Date();
 		this.saleTime = dateFormat.format(date);
 	}
 	
 	//Getters
-	public int getSaleNumber() {
+	public long getSaleNumber() {
 		return this.saleNumber;
 	}
 	public String getSaleTime() {
@@ -51,28 +49,36 @@ public class SaleData implements Serializable{
 		return this.register.getId();
 	}
 	
-	public String printSaleTotal() {
+	public String getPrintSaleTotal() {
 		return decim.format(this.saleTotal);
 	}
 	
-	public int getNumberOfItems() {
-		int numberOfItems = 0;
-		for (InventoryData item : this.items) {
-			numberOfItems = numberOfItems + item.getSaleQuantity();
-		}
-		return numberOfItems;
+	//get the number of items in a sale
+	public int getNumItems() {
+		return this.numItems;
 	}
 	
 	//Adding and Removing items from a sale
 	public void editSaleItems(ObservableList<InventoryData> products) {
-		ObservableList<InventoryData> itemList = products;
-		items.addAll(itemList);
-		this.saleTotal = 0.00;
-		for (InventoryData product : products) {
-			this.saleTotal = this.saleTotal + product.getSaleTotal();
+		if (!products.isEmpty()) {
+			ObservableList<InventoryData> itemList = products;
+			items.addAll(itemList);
+			this.numItems = 0;
+			this.saleTotal = 0.00;
+			for (InventoryData product : products) {
+				this.saleTotal = this.saleTotal + product.getSaleTotal();
+				this.numItems = this.numItems + product.getSaleQuantity();
+			}
 		}
 	}
 	
+	//Generate unique sale id
+	public long genSaleID() {
+	        Date time = new Date();
+	        SimpleDateFormat genID = new SimpleDateFormat("yyMMddhhmmssMs");
+	        String saleID = genID.format(time);
+	        return Long.parseLong(saleID);
+	    }
 	
 	//Cancel a Sale
 	public void cancelSale() {
