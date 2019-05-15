@@ -5,7 +5,6 @@ package application.controller;
 import java.io.IOException;
 import java.util.List;
 
-import application.Model.POSUtils;
 import application.Model.Sale.SaleData;
 import application.Model.Sale.SaleUtils;
 import javafx.collections.FXCollections;
@@ -46,7 +45,7 @@ public class StartReturnController {
 	public void toReturn(ActionEvent event) throws IOException {
 		long saleNum = Long.parseLong(saleNumber.getText());
 			for (SaleData sale : saleData) {
-				if (saleNum == sale.getSaleNumber());
+				if (saleNum == sale.getSaleNumber())
 					this.returnSale = sale;
 			}
 		
