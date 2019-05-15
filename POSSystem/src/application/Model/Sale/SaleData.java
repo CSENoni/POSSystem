@@ -153,5 +153,8 @@ public class SaleData implements Serializable {
 		}
 	}
 
+	public void setSaleNumber(long number) {
+		this.saleNumber = number;
+	}
 	
 }

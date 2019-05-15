@@ -112,7 +112,7 @@ public class SaleAddItemController {
 
 	public void addItemToSale() {
 		InventoryData item = inventoryTable.getSelectionModel().getSelectedItem();
-		if (item != null) {
+		if (item != null && item.getStockQuantity() > 0) {
 			if ((item.getStockQuantity() - quantity.getValue()) < item.getThreshold() && item.getOutstandingOrder() <= 0) {
 				Alert alert = new Alert(AlertType.WARNING,
 						"This product quantity will be below the threshold. Would you like to stop and make a re-order now?",
@@ -131,7 +131,10 @@ public class SaleAddItemController {
 						saleList.set(saleList.indexOf(item), item);
 					}
 
-					item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
+					if (item.getStockQuantity() - quantity.getValue() <= 0) {
+						item.setStockQuantity(0);
+					}
+					else item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
 					int idx = inventoryList.indexOf(item);
 					inventoryList.set(idx, item);
 					changedItemPos.add(idx);

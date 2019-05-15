@@ -184,7 +184,7 @@ public class ReturnController {
 				idx++;
 			}
 		}
-		
+		this.returnedSale.setSaleNumber(Long.parseLong(saleNumber.getText()));
 		this.returnedSale.setReturnTotal();
 		this.returnedSale.setReturnNumItem();
 		this.returnedSale.setSaleTime();
