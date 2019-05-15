@@ -67,7 +67,7 @@
                </font>
             </Button>
             <Spinner fx:id="quantity" editable="true" prefHeight="26.0" prefWidth="70.0" />
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" text="&lt;&lt;&lt;">
+            <Button mnemonicParsing="false" onAction="#removeItemFromReturn" prefHeight="37.0" prefWidth="70.0" text="&lt;&lt;&lt;">
                <font>
                   <Font size="20.0" />
                </font>

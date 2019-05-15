@@ -86,6 +86,13 @@ public class ReturnController {
 			}
 		});
 		
+		returnTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if(newSelection != null) {
+				initSpinner(newSelection.getReturnQuantity());
+				saleTable.getSelectionModel().clearSelection();
+			}
+		});
+		
 	}
 	
 	
@@ -129,6 +136,25 @@ public class ReturnController {
 				item.setReturnQuantity(item.getReturnQuantity() + quantity.getValue());
 				returnItemList.set(returnItemList.indexOf(item), item);
 			}
+			item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
+			
+		}
 	}
+	
+	public void removeItemFromReturn() {
+		InventoryData item = returnTable.getSelectionModel().getSelectedItem();
+		if(item != null) {
+			if (quantity.getValue() >= item.getReturnQuantity()) {
+				item.setSaleQuantity(item.getSaleQuantity() + item.getReturnQuantity());
+				item.setReturnQuantity(0);
+				returnItemList.remove(item);
+			}else {
+				item.setSaleQuantity(item.getSaleQuantity() + quantity.getValue());
+				item.setReturnQuantity(item.getReturnQuantity() - quantity.getValue());
+				returnItemList.set(returnItemList.indexOf(item), item);
+			}
+			
+		}
 	}
+	
 }
