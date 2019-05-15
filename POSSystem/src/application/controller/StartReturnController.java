@@ -5,6 +5,7 @@ package application.controller;
 import java.io.IOException;
 import java.util.List;
 
+import application.Model.Inventory.InventoryData;
 import application.Model.Sale.SaleData;
 import application.Model.Sale.SaleUtils;
 import javafx.collections.FXCollections;
@@ -27,7 +28,8 @@ public class StartReturnController {
 	private TextField saleNumber;
 	
 	private ObservableList<SaleData> saleData;
-	SaleData returnSale;
+	private ObservableList<InventoryData> saleItems = FXCollections.observableArrayList();
+	private SaleData returnSale;
 
 	
 	@FXML
@@ -45,14 +47,21 @@ public class StartReturnController {
 	public void toReturn(ActionEvent event) throws IOException {
 		long saleNum = Long.parseLong(saleNumber.getText());
 			for (SaleData sale : saleData) {
-				if (saleNum == sale.getSaleNumber())
+				if (saleNum == sale.getSaleNumber()) {
 					this.returnSale = sale;
+				}
 			}
+
 		
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/Return.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
 			ReturnController controller = fxmlLoader.getController();
 			controller.sendSale(this.returnSale);
+			controller.setSaleTable(getItems());
+			
+			if (saleItems !=null && saleItems.size() > 0)
+				controller.sendSaleItems(saleItems);
+			
 			
 			Scene scene = new Scene(root);
 			
@@ -60,5 +69,12 @@ public class StartReturnController {
 			window.setScene(scene);
 			window.show();
 		}
+	
+	public ObservableList<InventoryData> getItems(){
+		for (InventoryData item : this.returnSale.getSaleItems()) {
+			saleItems.add(item);
+		}
+		return saleItems;
+	}
 	
 }

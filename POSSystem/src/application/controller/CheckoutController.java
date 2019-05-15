@@ -93,14 +93,16 @@ public class CheckoutController {
 		if(totalDue != null && totalDue.getText().length() > 0) {
 			double due = Double.parseDouble(totalDue.getText());
 			if(due == 0) {
+				this.newSale.setPaid(Double.parseDouble(totalPaid.getText()));
+				this.newSale.setChange(Double.parseDouble(totalChange.getText()));
+				SaleUtils.writeSale(this.newSale);
+				
 				for(InventoryData item : saleList) {
 					item.setOutstandingOrder(item.getOutstandingOrder() + item.getSaleQuantity());
 					item.setSaleQuantity(0);
 					InventoryUtils.update(item);
 				}
-				this.newSale.setPaid(Double.parseDouble(totalPaid.getText()));
-				this.newSale.setChange(Double.parseDouble(totalChange.getText()));
-				SaleUtils.writeSale(this.newSale);
+				
 				
 				POSUtils.changeScene(event, getClass(), "../view/SaleComplete.fxml"); 
 			}
@@ -122,3 +124,4 @@ public class CheckoutController {
 		return true;
 	}
 }
+

@@ -91,11 +91,16 @@ public class SaleData implements Serializable {
 	public int getNumItems() {
 		return this.numItems;
 	}
-
-	// Adding and Removing items from a sale
+	
+	public ArrayList<InventoryData> getSaleItems(){
+		return this.items;
+	}
+	
+	//Adding and Removing items from a sale
 	public void editSaleItems(ObservableList<InventoryData> products) {
 		if (!products.isEmpty()) {
 			ObservableList<InventoryData> itemList = products;
+			items.clear();
 			items.addAll(itemList);
 			this.numItems = 0;
 			this.saleTotal = 0.00;
