@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ReturnController {
 
 	private SaleData returnSale;
+	private SaleData returnedSale = new SaleData();
 	private ObservableList<InventoryData> saleItemList = FXCollections.observableArrayList();;
 	private ObservableList<InventoryData> returnItemList = FXCollections.observableArrayList();;
 	private double total;
@@ -166,16 +167,19 @@ public class ReturnController {
 	}
 	
 	public void completeReturn(ActionEvent event) throws IOException {
-		this.returnSale.editSaleItems(returnItemList);
+		this.returnedSale.editSaleItems(returnItemList);
 		for (InventoryData item : returnItemList) {
 			item.setSaleQuantity(item.getReturnQuantity());
 		}
-		this.returnSale.setSaleTotal(this.returnSale.getSaleTotal() * -1);
-		this.returnSale.setSaleTime();
-		this.returnSale.setChange(0);
-		this.returnSale.setPaid(0);
-		this.returnSale.setType("Return");
-		SaleUtils.writeSale(this.returnSale);
+		
+		this.returnedSale.setReturnTotal();
+		this.returnedSale.setReturnNumItem();
+		this.returnedSale.setSaleTime();
+		this.returnedSale.setChange(0);
+		this.returnedSale.setPaid(0);
+		this.returnedSale.setType("Return");
+		SaleUtils.writeSale(this.returnedSale);
+
 		
 		existReturn(event);
 	}

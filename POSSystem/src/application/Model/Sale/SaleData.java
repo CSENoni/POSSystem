@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import application.Model.Inventory.InventoryData;
 import application.Model.Register.RegisterData;
 import application.Model.Register.RegisterUtils;
@@ -139,4 +138,20 @@ public class SaleData implements Serializable {
 		return this.type;
 	}
 	
+	public void setReturnTotal() {
+		this.saleTotal = 0;
+		for (InventoryData product : this.items) {
+			this.saleTotal = this.saleTotal + (product.getReturnQuantity()) * product.getPrice();
+		}
+		this.saleTotal = this.saleTotal * -1;
+	}
+	public void setReturnNumItem() {
+		this.numItems = 0;
+		for (InventoryData product : this.items) {
+			this.numItems = this.numItems + product.getReturnQuantity();
+		}
+	}
+
+	
 }
+
