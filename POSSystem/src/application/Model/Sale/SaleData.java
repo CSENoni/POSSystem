@@ -9,82 +9,90 @@ import java.util.Date;
 import java.util.Iterator;
 import application.Model.Inventory.InventoryData;
 import application.Model.Register.RegisterData;
-import application.Model.User.UserData;
+import application.Model.Register.RegisterUtils;
 import javafx.collections.ObservableList;
 
-public class SaleData implements Serializable{
+public class SaleData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private long saleNumber;
 	private String saleTime;
 	private double saleTotal = 0.0;
-	private UserData user;
-	private RegisterData register;
+	private int userId;
+	private String registerId;
 	private ArrayList<InventoryData> items = new ArrayList<InventoryData>();
 	DecimalFormat decim = new DecimalFormat("#,##0.00");
-	private int numItems;	//Total number of items in a sale
+	private int numItems; // Total number of items in a sale
 	private double paid;
 	private double change;
-	
-	
+
 	public SaleData() {
 		this.saleNumber = genSaleID();
 		DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
 		Date date = new Date();
 		this.saleTime = dateFormat.format(date);
+		RegisterData reg = RegisterUtils.getCurrentRegisterData();
+		if(reg != null) {
+			registerId = reg.getId();
+			userId = reg.getUserId();
+		}
 	}
-	
-	//Getters
+
+	// Getters
 	public long getSaleNumber() {
 		return this.saleNumber;
 	}
+
 	public String getSaleTime() {
 		return this.saleTime;
 	}
+
 	public double getSaleTotal() {
 		return this.saleTotal;
 	}
-	public int getUser() {
-		return this.user.getId();
+
+	public int getUserId() {
+		return this.userId;
 	}
-	public String getRegister() {
-		return this.register.getId();
+
+	public String getRegisterId() {
+		return this.registerId;
 	}
-	
+
 	public String getPrintSaleTotal() {
 		return "$" + decim.format(this.saleTotal);
 	}
-	
+
 	public void setPaid(double payment) {
 		this.paid = payment;
 	}
-	
+
 	public double getPaid() {
 		return this.paid;
 	}
-	
+
 	public String getPrintPaid() {
 		return "$" + decim.format(this.paid);
 	}
-	
+
 	public void setChange(double amount) {
 		this.change = amount;
 	}
-	
+
 	public double getChange() {
 		return this.change;
 	}
-	
+
 	public String getPrintChange() {
 		return "$" + decim.format(this.change);
 	}
-	
-	//get the number of items in a sale
+
+	// get the number of items in a sale
 	public int getNumItems() {
 		return this.numItems;
 	}
-	
-	//Adding and Removing items from a sale
+
+	// Adding and Removing items from a sale
 	public void editSaleItems(ObservableList<InventoryData> products) {
 		if (!products.isEmpty()) {
 			ObservableList<InventoryData> itemList = products;
@@ -97,18 +105,18 @@ public class SaleData implements Serializable{
 			}
 		}
 	}
-	
-	//Generate unique sale id
+
+	// Generate unique sale id
 	public long genSaleID() {
-	        Date time = new Date();
-	        SimpleDateFormat genID = new SimpleDateFormat("yyMMddhhmmssMs");
-	        String saleID = genID.format(time);
-	        return Long.parseLong(saleID);
-	    }
-	
-	//Cancel a Sale
+		Date time = new Date();
+		SimpleDateFormat genID = new SimpleDateFormat("yyMMddhhmmssMs");
+		String saleID = genID.format(time);
+		return Long.parseLong(saleID);
+	}
+
+	// Cancel a Sale
 	public void cancelSale() {
-		Iterator<InventoryData> iterator = items.iterator(); 
+		Iterator<InventoryData> iterator = items.iterator();
 		while (iterator.hasNext()) {
 			InventoryData product = iterator.next();
 			if (product != null) {
@@ -118,8 +126,4 @@ public class SaleData implements Serializable{
 			}
 		}
 	}
-	
-
-		
 }
-

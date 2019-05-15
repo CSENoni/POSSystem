@@ -33,7 +33,7 @@ public class UserUtils {
 		}
 	}
 	
-	public static boolean get(String username, String password) {
+	public static UserData get(String username, String password) {
 		File file = new File(new File("").getAbsoluteFile() + File.separator + "User.txt");
 		FileInputStream fs = null;
 		ObjectInputStream o = null;
@@ -48,14 +48,14 @@ public class UserUtils {
 				
 				for(UserData data : datas) {
 					if(data.getUserName().equals(username) && data.getPassWord().equals(password)) {
-						return true;
+						return data;
 					}
 				}
 			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	private static List<UserData> getAll() {

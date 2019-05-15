@@ -14,7 +14,7 @@ public class RegisterUtils {
 		try {
 			List<RegisterData> datas = getAll();
 			
-			FileOutputStream fs = new FileOutputStream(new File("Register.txt"));
+			FileOutputStream fs = new FileOutputStream(new File(new File("").getAbsoluteFile() + File.separator + "Register.txt"));
 			ObjectOutputStream o = new ObjectOutputStream(fs);
 			
 			if(datas == null) {
@@ -35,7 +35,7 @@ public class RegisterUtils {
 	
 	public static List<RegisterData> getAll() {
 		try {
-			File file = new File("Register.txt");
+			File file = new File(new File("").getAbsoluteFile() + File.separator + "Register.txt");
 			FileInputStream fs = null;
 			ObjectInputStream oi = null;
 			if(file.exists()) {
@@ -49,6 +49,13 @@ public class RegisterUtils {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public static RegisterData getCurrentRegisterData() {
+		List<RegisterData> list = getAll();
+		if(list != null)
+			return list.get(list.size() - 1);
 		return null;
 	}
 }

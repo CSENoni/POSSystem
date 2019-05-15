@@ -3,6 +3,9 @@ package application.controller;
 import java.io.IOException;
 
 import application.Model.POSUtils;
+import application.Model.Register.RegisterData;
+import application.Model.Register.RegisterUtils;
+import application.Model.User.UserData;
 import application.Model.User.UserUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +37,9 @@ public class LoginController {
 		String name = userName.getText();
 		String pass = userPassword.getText();
 		
-		if(isNotEmpty(name) && isNotEmpty(pass) && UserUtils.get(name, pass)) { 
+		UserData user = null;
+		if(isNotEmpty(name) && isNotEmpty(pass) && (user = UserUtils.get(name, pass)) != null) { 
+			RegisterUtils.write(new RegisterData(user.getId()));
 			POSUtils.changeScene(event, getClass(), "../view/Home.fxml");
 		}else {
 			userName.setStyle("-fx-border-width: 3,3,3,3; -fx-border-color: red;");

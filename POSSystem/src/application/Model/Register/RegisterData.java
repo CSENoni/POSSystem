@@ -6,38 +6,27 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class RegisterData implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private List<Integer> userIds;
+	private int userId;
 	private Date date;
-	private double amountOfSales;
-	private static AtomicInteger id_intgenerator = new AtomicInteger(0);
 	
-	public RegisterData(int userId, double amountOfSales) {
+	public RegisterData(int userId) {
 		String id_generator = getUniqueId();
-		if(id_generator == null) {
-			id = "" + id_intgenerator.getAndIncrement();
-		}else {
-			id = id_generator;
-		}
-		userIds = new LinkedList<Integer>();
-		userIds.add(userId);
+		id = id_generator;
+		this.userId = userId;
 		this.date = new Date();
-		this.amountOfSales = amountOfSales;
 	}
 	
 	public String getId() {
 		return id;
 	}
 	
-	public List<Integer> getUserIds() {
-		return userIds;
+	public int getUserId() {
+		return userId;
 	}
 	
 	public Date getDate() {
@@ -45,12 +34,6 @@ public class RegisterData implements Serializable{
 	}
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	public double getAmountOfSales() {
-		return amountOfSales;
-	}
-	public void setAmountOfSales(double amountOfSales) {
-		this.amountOfSales = amountOfSales;
 	}
 	
 	private static String getUniqueId() {
@@ -64,7 +47,6 @@ public class RegisterData implements Serializable{
  			}
  			return sb.toString();
  		} catch (SocketException | UnknownHostException e) {
- 			// TODO Auto-generated catch block
  			e.printStackTrace();
  		}
  		return null;
