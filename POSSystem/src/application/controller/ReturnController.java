@@ -65,13 +65,6 @@ public class ReturnController {
 	@FXML
 	private void initialize() {
 		
-		saleProductColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("ProductName"));
-		saleQuantityColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, Integer>("SaleQuantity"));
-		salePriceColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("PrintSaleTotal"));
-		
-		saleTable.setItems(saleItemList);
-		saleTable.setEditable(true);
-		
 		returnProductColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("ProductName"));
 		returnQuantityColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, Integer>("ReturnQuantity"));
 		returnPriceColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("PrintReturnTotal"));
@@ -137,7 +130,7 @@ public class ReturnController {
 				returnItemList.set(returnItemList.indexOf(item), item);
 			}
 			item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
-			
+			saleTable.refresh();
 		}
 	}
 	
@@ -153,7 +146,7 @@ public class ReturnController {
 				item.setReturnQuantity(item.getReturnQuantity() - quantity.getValue());
 				returnItemList.set(returnItemList.indexOf(item), item);
 			}
-			
+			saleTable.refresh();
 		}
 	}
 	
