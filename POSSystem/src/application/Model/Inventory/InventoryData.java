@@ -18,6 +18,8 @@ public class InventoryData implements Serializable {
 	private int saleQuantity; //number of items in a sale
 	private double saleTotal; //total cost of item price x quantity
 	private DecimalFormat decim = new DecimalFormat("#,##0.00");
+	private int returnQuantity;
+	private double returnTotal;
 
 	
 	public InventoryData(String productName, String supplier, double price, int quantity, int threshold) {
@@ -103,6 +105,19 @@ public class InventoryData implements Serializable {
 	
 	public boolean isOnSale() {
 		return this.saleQuantity > 0;
+	}
+	
+	public void setReturnQuantity(int number) {
+		this.returnQuantity = number;
+		this.returnTotal = this.getPrice() * number;
+	}
+	
+	public int getReturnQuantity() {
+		return this.returnQuantity;
+	}
+	
+	public String getPrintReturnTotal() {
+		return decim.format(this.returnTotal);
 	}
 	
 }

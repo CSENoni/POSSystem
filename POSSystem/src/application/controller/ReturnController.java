@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +22,8 @@ public class ReturnController {
 
 	SaleData returnSale;
 	ObservableList<InventoryData> saleItemList = FXCollections.observableArrayList();;
+	ObservableList<InventoryData> returnItemList = FXCollections.observableArrayList();;
+
 	
 	
 	@FXML
@@ -50,10 +54,13 @@ public class ReturnController {
 	private TableColumn<InventoryData, Integer> returnQuantityColumn;
 	
 	@FXML
-	private TableColumn<InventoryData, Double> returnPriceColumn;
+	private TableColumn<InventoryData, String> returnPriceColumn;
 	
 	@FXML
 	private Label returnTotal;
+	
+	@FXML
+	private Spinner<Integer> quantity;
 	
 	@FXML
 	private void initialize() {
@@ -64,6 +71,20 @@ public class ReturnController {
 		
 		saleTable.setItems(saleItemList);
 		saleTable.setEditable(true);
+		
+		returnProductColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("ProductName"));
+		returnQuantityColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, Integer>("ReturnQuantity"));
+		returnPriceColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("PrintReturnTotal"));
+		
+		returnTable.setItems(returnItemList);
+		returnTable.setEditable(true);
+		
+		saleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if(newSelection != null) {
+				initSpinner(newSelection.getSaleQuantity());
+				returnTable.getSelectionModel().clearSelection();
+			}
+		});
 		
 	}
 	
@@ -92,4 +113,22 @@ public class ReturnController {
 		saleTable.setEditable(true);
 	}
 	
+	private void initSpinner(int stockQuantity) {
+		// Restrict the quantity to add to the sale
+        quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, stockQuantity));
+    }
+	
+	public void addItemToReturn() {
+		InventoryData item = saleTable.getSelectionModel().getSelectedItem();
+		if(item != null) {
+			if (!returnItemList.contains(item)) {
+				item.setReturnQuantity(quantity.getValue());
+				returnItemList.add(item);
+			}
+			else {
+				item.setReturnQuantity(item.getReturnQuantity() + quantity.getValue());
+				returnItemList.set(returnItemList.indexOf(item), item);
+			}
+	}
+	}
 }

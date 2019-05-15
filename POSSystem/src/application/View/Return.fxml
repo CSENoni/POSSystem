@@ -61,7 +61,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" text="&gt;&gt;&gt;">
+            <Button mnemonicParsing="false" onAction="#addItemToReturn" prefHeight="37.0" prefWidth="70.0" text="&gt;&gt;&gt;">
                <font>
                   <Font size="20.0" />
                </font>
