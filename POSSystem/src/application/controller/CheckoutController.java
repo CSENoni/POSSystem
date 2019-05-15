@@ -98,7 +98,6 @@ public class CheckoutController {
 				SaleUtils.writeSale(this.newSale);
 				
 				for(InventoryData item : saleList) {
-					item.setOutstandingOrder(item.getOutstandingOrder() + item.getSaleQuantity());
 					item.setSaleQuantity(0);
 					InventoryUtils.update(item);
 				}

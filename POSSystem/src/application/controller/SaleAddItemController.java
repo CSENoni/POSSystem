@@ -113,15 +113,29 @@ public class SaleAddItemController {
 	public void addItemToSale() {
 		InventoryData item = inventoryTable.getSelectionModel().getSelectedItem();
 		if (item != null) {
-			if ((item.getStockQuantity() - quantity.getValue()) < item.getThreshold()) {
+			if ((item.getStockQuantity() - quantity.getValue()) < item.getThreshold() && item.getOutstandingOrder() <= 0) {
 				Alert alert = new Alert(AlertType.WARNING,
 						"This product quantity will be below the threshold. Would you like to stop and make a re-order now?",
 						ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
 
 				if (alert.getResult() == ButtonType.YES) {
-					cancelAddingItems(null);
-				} 
+					item.setOutstandingOrder(item.getOutstandingOrder() + 1);
+				}
+				else {
+					if (!saleList.contains(item)) {
+						item.setSaleQuantity(quantity.getValue());
+						saleList.add(item);
+					} else {
+						item.setSaleQuantity(item.getSaleQuantity() + quantity.getValue());
+						saleList.set(saleList.indexOf(item), item);
+					}
+
+					item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
+					int idx = inventoryList.indexOf(item);
+					inventoryList.set(idx, item);
+					changedItemPos.add(idx);
+				}
 			}
 			else {
 				if (!saleList.contains(item)) {
