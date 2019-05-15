@@ -3,6 +3,7 @@
 package application.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import application.Model.POSUtils;
 import application.Model.Inventory.InventoryData;
@@ -20,9 +21,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ReturnController {
 
-	SaleData returnSale;
-	ObservableList<InventoryData> saleItemList = FXCollections.observableArrayList();;
-	ObservableList<InventoryData> returnItemList = FXCollections.observableArrayList();;
+	private SaleData returnSale;
+	private ObservableList<InventoryData> saleItemList = FXCollections.observableArrayList();;
+	private ObservableList<InventoryData> returnItemList = FXCollections.observableArrayList();;
+	private double total;
+	private DecimalFormat decim = new DecimalFormat("#,##0.00");
+
+	
 
 	
 	
@@ -131,6 +136,7 @@ public class ReturnController {
 			}
 			item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
 			saleTable.refresh();
+			returnTotal.setText(decim.format(calculateReturnTotal()));
 		}
 	}
 	
@@ -147,7 +153,18 @@ public class ReturnController {
 				returnItemList.set(returnItemList.indexOf(item), item);
 			}
 			saleTable.refresh();
+			returnTotal.setText(decim.format(calculateReturnTotal()));
+
 		}
+	}
+	
+	public double calculateReturnTotal() {
+		this.total = 0.00;
+		for (InventoryData product : returnItemList) {
+			this.total = this.total + Double.parseDouble(product.getPrintReturnTotal());
+		}
+		return this.total;
+		
 	}
 	
 }
