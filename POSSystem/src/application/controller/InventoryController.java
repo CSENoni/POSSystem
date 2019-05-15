@@ -26,9 +26,6 @@ public class InventoryController {
 	private TableView<InventoryData> tableData;
 
 	@FXML
-	private TableColumn<InventoryData, Integer> productIdColumn;
-
-	@FXML
 	private TableColumn<InventoryData, String> productColumn;
 
 	@FXML
@@ -39,9 +36,6 @@ public class InventoryController {
 
 	@FXML
 	private TableColumn<InventoryData, Integer> quantityColumn;
-
-	@FXML
-	private TableColumn<InventoryData, Integer> pendingColumn;
 
 	@FXML
 	private TableColumn<InventoryData, Integer> thresholdColumn;
@@ -57,12 +51,10 @@ public class InventoryController {
 		if (list != null)
 			inventoryData.addAll(list);
 
-		productIdColumn.setCellValueFactory(new PropertyValueFactory<>("ProductId"));
 		productColumn.setCellValueFactory(new PropertyValueFactory<>("ProductName"));
 		supplierColumn.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("StockQuantity"));
-		pendingColumn.setCellValueFactory(new PropertyValueFactory<>("OutstandingOrder"));
 		thresholdColumn.setCellValueFactory(new PropertyValueFactory<>("Threshold"));
 
 		tableData.setItems(inventoryData);

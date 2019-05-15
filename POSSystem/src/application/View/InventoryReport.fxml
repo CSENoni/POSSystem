@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.InventoryReportController"> 
-	<top>
-		<fx:include fx:id="headerView" source="Header.fxml" />
-	</top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.InventoryReportController">
+   <top>
+      <fx:include fx:id="headerView" source="Header.fxml" />
+   </top>
+   
+   <center>
+      <ScrollPane BorderPane.alignment="CENTER">
+         <content>
+            <TableView fx:id="tableData" prefHeight="524.0" prefWidth="887.0">
+              <columns>
+                <TableColumn fx:id="productIdColumn" prefWidth="51.200013756752014" text="#" />
+                <TableColumn fx:id="productColumn" prefWidth="163.99996185302734" text="PRODUCT" />
+                <TableColumn fx:id="supplierColumn" prefWidth="152.00006103515625" text="SUPPLIER" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="155.19998168945312" text="QUANTITY" />
+                  <TableColumn fx:id="priceColumn" prefWidth="140.00006103515625" text="PRICE" />
+                  <TableColumn fx:id="pendingColumn" minWidth="0.0" prefWidth="126.39996337890625" text="PENDING" />
+                  <TableColumn fx:id="thresholdColumn" maxWidth="117.60003662109375" minWidth="-1.0" prefWidth="96.0" text="THRESHOLD" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </center>
 </BorderPane>
