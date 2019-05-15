@@ -126,23 +126,26 @@ public class ReturnController {
 	public void addItemToReturn() {
 		InventoryData item = saleTable.getSelectionModel().getSelectedItem();
 		if(item != null) {
-			if (!returnItemList.contains(item)) {
-				item.setReturnQuantity(quantity.getValue());
-				returnItemList.add(item);
+			if (item.getSaleQuantity() > 0) {
+				if (!returnItemList.contains(item)) {
+					item.setReturnQuantity(quantity.getValue());
+					returnItemList.add(item);
+				}
+				else {
+					item.setReturnQuantity(item.getReturnQuantity() + quantity.getValue());
+					returnItemList.set(returnItemList.indexOf(item), item);
+				}
+				item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
+				saleTable.refresh();
+				returnTotal.setText(decim.format(calculateReturnTotal()));
 			}
-			else {
-				item.setReturnQuantity(item.getReturnQuantity() + quantity.getValue());
-				returnItemList.set(returnItemList.indexOf(item), item);
-			}
-			item.setSaleQuantity(item.getSaleQuantity() - quantity.getValue());
-			saleTable.refresh();
-			returnTotal.setText(decim.format(calculateReturnTotal()));
 		}
 	}
 	
 	public void removeItemFromReturn() {
 		InventoryData item = returnTable.getSelectionModel().getSelectedItem();
 		if(item != null) {
+			
 			if (quantity.getValue() >= item.getReturnQuantity()) {
 				item.setSaleQuantity(item.getSaleQuantity() + item.getReturnQuantity());
 				item.setReturnQuantity(0);
