@@ -10,19 +10,18 @@ import java.util.Date;
 public class RegisterData implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private String registerId;
 	private int userId;
 	private Date date;
 	
 	public RegisterData(int userId) {
-		String id_generator = getUniqueId();
-		id = id_generator;
+		this.registerId = getUniqueId();
 		this.userId = userId;
 		this.date = new Date();
 	}
 	
-	public String getId() {
-		return id;
+	public String getRegisterId() {
+		return registerId;
 	}
 	
 	public int getUserId() {

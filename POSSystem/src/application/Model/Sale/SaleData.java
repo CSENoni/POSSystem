@@ -33,7 +33,7 @@ public class SaleData implements Serializable {
 		this.saleTime = dateFormat.format(date);
 		RegisterData reg = RegisterUtils.getCurrentRegisterData();
 		if(reg != null) {
-			registerId = reg.getId();
+			registerId = reg.getRegisterId();
 			userId = reg.getUserId();
 		}
 	}
