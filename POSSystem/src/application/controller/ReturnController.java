@@ -177,8 +177,14 @@ public class ReturnController {
 		this.returnSale.setType("Return");
 		SaleUtils.writeSale(this.returnSale);
 		
-		POSUtils.changeScene(event, getClass(), "../view/Home.fxml");
-
+		existReturn(event);
 	}
 	
+	public void existReturn(ActionEvent event) {
+		try {
+			POSUtils.changeScene(event, getClass(), "../view/Home.fxml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
