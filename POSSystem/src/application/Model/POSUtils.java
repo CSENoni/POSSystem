@@ -25,15 +25,16 @@ public class POSUtils {
 	
 	public static void cleanOngoingSale() {
 		List<InventoryData> list = InventoryUtils.getAll();
-		
-		int idx = 0;
-		for(InventoryData item : list) {
-			if(item.isOnSale()) {
-				item.setStockQuantity(item.getStockQuantity() + item.getSaleQuantity());
-				item.setSaleQuantity(0);
-				InventoryUtils.update(idx, item);
+		if(list != null) {
+			int idx = 0;
+			for(InventoryData item : list) {
+				if(item.isOnSale()) {
+					item.setStockQuantity(item.getStockQuantity() + item.getSaleQuantity());
+					item.setSaleQuantity(0);
+					InventoryUtils.update(idx, item);
+				}
+				idx++;
 			}
-			idx++;
 		}
 	}
 }
