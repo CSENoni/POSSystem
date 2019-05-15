@@ -121,20 +121,21 @@ public class SaleAddItemController {
 
 				if (alert.getResult() == ButtonType.YES) {
 					cancelAddingItems(null);
+				} 
+			}
+			else {
+				if (!saleList.contains(item)) {
+					item.setSaleQuantity(quantity.getValue());
+					saleList.add(item);
 				} else {
-					if (!saleList.contains(item)) {
-						item.setSaleQuantity(quantity.getValue());
-						saleList.add(item);
-					} else {
-						item.setSaleQuantity(item.getSaleQuantity() + quantity.getValue());
-						saleList.set(saleList.indexOf(item), item);
-					}
-
-					item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
-					int idx = inventoryList.indexOf(item);
-					inventoryList.set(idx, item);
-					changedItemPos.add(idx);
+					item.setSaleQuantity(item.getSaleQuantity() + quantity.getValue());
+					saleList.set(saleList.indexOf(item), item);
 				}
+
+				item.setStockQuantity(item.getStockQuantity() - quantity.getValue());
+				int idx = inventoryList.indexOf(item);
+				inventoryList.set(idx, item);
+				changedItemPos.add(idx);
 			}
 		}
 	}
