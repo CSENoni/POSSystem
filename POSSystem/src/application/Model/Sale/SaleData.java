@@ -145,6 +145,7 @@ public class SaleData implements Serializable {
 		}
 		this.saleTotal = this.saleTotal * -1;
 	}
+	
 	public void setReturnNumItem() {
 		this.numItems = 0;
 		for (InventoryData product : this.items) {
@@ -154,4 +155,3 @@ public class SaleData implements Serializable {
 
 	
 }
-

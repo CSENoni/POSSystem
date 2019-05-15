@@ -4,9 +4,11 @@ package application.controller;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.List;
 
 import application.Model.POSUtils;
 import application.Model.Inventory.InventoryData;
+import application.Model.Inventory.InventoryUtils;
 import application.Model.Sale.SaleData;
 import application.Model.Sale.SaleUtils;
 import javafx.collections.FXCollections;
@@ -22,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ReturnController {
 
+	private List<InventoryData> inventoryList;
 	private SaleData returnSale;
 	private SaleData returnedSale = new SaleData();
 	private ObservableList<InventoryData> saleItemList = FXCollections.observableArrayList();;
@@ -89,7 +92,7 @@ public class ReturnController {
 				saleTable.getSelectionModel().clearSelection();
 			}
 		});
-		
+		inventoryList = InventoryUtils.getAll();
 	}
 	
 	
@@ -170,6 +173,16 @@ public class ReturnController {
 		this.returnedSale.editSaleItems(returnItemList);
 		for (InventoryData item : returnItemList) {
 			item.setSaleQuantity(item.getReturnQuantity());
+			int idx = 0;
+			for(InventoryData data : inventoryList) {
+				if(item.getProductId() == data.getProductId() && 
+						item.getProductName().equals(data.getProductName())) {
+					data.setOutstandingOrder(item.getOutstandingOrder() - item.getReturnQuantity());
+					data.setStockQuantity(item.getStockQuantity() + item.getReturnQuantity());
+					InventoryUtils.update(inventoryList.indexOf(data), data);
+				}
+				idx++;
+			}
 		}
 		
 		this.returnedSale.setReturnTotal();
@@ -179,7 +192,7 @@ public class ReturnController {
 		this.returnedSale.setPaid(0);
 		this.returnedSale.setType("Return");
 		SaleUtils.writeSale(this.returnedSale);
-
+		
 		
 		existReturn(event);
 	}
