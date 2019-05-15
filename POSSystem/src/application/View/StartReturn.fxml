@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.StartReturnController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.StartReturnController">
     <children>
        <fx:include fx:id="headerView" source="Header.fxml" />
        <Label layoutX="183.0" layoutY="177.0" prefHeight="50.0" prefWidth="206.0" text="Sale Number: ">
@@ -14,7 +14,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="saleNumber" layoutX="389.0" layoutY="177.0" prefHeight="50.0" prefWidth="317.0" promptText="Enter Sale Number" />
+      <TextField fx:id="saleNumber" layoutX="389.0" layoutY="177.0" onKeyTyped="#inputValidation" prefHeight="50.0" prefWidth="317.0" promptText="Enter Sale Number" />
       <Button layoutX="343.0" layoutY="300.0" mnemonicParsing="false" onAction="#toReturn" prefHeight="50.0" prefWidth="215.0" text="Return Items">
          <font>
             <Font size="24.0" />
