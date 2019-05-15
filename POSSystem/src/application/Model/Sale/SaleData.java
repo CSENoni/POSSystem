@@ -25,6 +25,7 @@ public class SaleData implements Serializable {
 	private int numItems; // Total number of items in a sale
 	private double paid;
 	private double change;
+	private String type;
 
 	public SaleData() {
 		this.saleNumber = genSaleID();
@@ -36,6 +37,7 @@ public class SaleData implements Serializable {
 			registerId = reg.getRegisterId();
 			userId = reg.getUserId();
 		}
+		this.type = "Sale";
 	}
 
 	// Getters
@@ -47,6 +49,10 @@ public class SaleData implements Serializable {
 		return this.saleTime;
 	}
 
+	public void setSaleTotal(double number) {
+		this.saleTotal = number;
+	}
+	
 	public double getSaleTotal() {
 		return this.saleTotal;
 	}
@@ -119,16 +125,18 @@ public class SaleData implements Serializable {
 		return Long.parseLong(saleID);
 	}
 
-	// Cancel a Sale
-	public void cancelSale() {
-		Iterator<InventoryData> iterator = items.iterator();
-		while (iterator.hasNext()) {
-			InventoryData product = iterator.next();
-			if (product != null) {
-				this.saleTotal = (this.saleTotal - product.getPrice());
-				product.setStockQuantity(product.getStockQuantity() + 1);
-				iterator.remove();
-			}
-		}
+	public void setSaleTime() {
+		DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
+		Date date = new Date();
+		this.saleTime = dateFormat.format(date);
 	}
+	
+	public void setType(String newType) {
+		this.type = newType;
+	}
+	
+	public String getType() {
+		return this.type;
+	}
+	
 }

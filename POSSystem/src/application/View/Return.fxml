@@ -114,7 +114,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="applyButton" mnemonicParsing="false" text="Apply">
+            <Button fx:id="applyButton" mnemonicParsing="false" onAction="#completeReturn" text="Apply">
                <font>
                   <Font size="22.0" />
                </font>

@@ -59,9 +59,6 @@ public class StartReturnController {
 			controller.sendSale(this.returnSale);
 			controller.setSaleTable(getItems());
 			
-			if (saleItems !=null && saleItems.size() > 0)
-				controller.sendSaleItems(saleItems);
-			
 			
 			Scene scene = new Scene(root);
 			

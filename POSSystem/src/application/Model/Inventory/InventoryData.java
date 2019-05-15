@@ -120,4 +120,5 @@ public class InventoryData implements Serializable {
 		return decim.format(this.returnTotal);
 	}
 	
+	
 }

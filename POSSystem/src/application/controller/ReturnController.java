@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import application.Model.POSUtils;
 import application.Model.Inventory.InventoryData;
 import application.Model.Sale.SaleData;
+import application.Model.Sale.SaleUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,10 +28,7 @@ public class ReturnController {
 	private double total;
 	private DecimalFormat decim = new DecimalFormat("#,##0.00");
 
-	
 
-	
-	
 	@FXML
 	private HeaderController headerViewController;
 	
@@ -104,17 +102,14 @@ public class ReturnController {
 		saleNumber.setText(Long.toString(sale.getSaleNumber()));
 	}
 	
-	public void sendSaleItems(ObservableList<InventoryData> itemList) {
-		this.saleItemList = itemList;
-	}
-	
 	
 	public void setSaleTable(ObservableList<InventoryData> itemList) {
+		this.saleItemList = itemList;
 		saleProductColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("ProductName"));
 		saleQuantityColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, Integer>("SaleQuantity"));
 		salePriceColumn.setCellValueFactory(new PropertyValueFactory<InventoryData, String>("PrintSaleTotal"));
 		
-		saleTable.setItems(itemList);
+		saleTable.setItems(saleItemList);
 		saleTable.setEditable(true);
 	}
 	
@@ -168,6 +163,22 @@ public class ReturnController {
 		}
 		return this.total;
 		
+	}
+	
+	public void completeReturn(ActionEvent event) throws IOException {
+		this.returnSale.editSaleItems(returnItemList);
+		for (InventoryData item : returnItemList) {
+			item.setSaleQuantity(item.getReturnQuantity());
+		}
+		this.returnSale.setSaleTotal(this.returnSale.getSaleTotal() * -1);
+		this.returnSale.setSaleTime();
+		this.returnSale.setChange(0);
+		this.returnSale.setPaid(0);
+		this.returnSale.setType("Return");
+		SaleUtils.writeSale(this.returnSale);
+		
+		POSUtils.changeScene(event, getClass(), "../view/Home.fxml");
+
 	}
 	
 }

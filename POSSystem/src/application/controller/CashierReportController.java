@@ -25,6 +25,9 @@ public class CashierReportController {
 	private TableColumn<SaleData, String> registerColumn;
 	
 	@FXML
+	private TableColumn<SaleData, String> typeColumn;
+	
+	@FXML
 	private TableColumn<SaleData, Long> saleIDColumn;
 	
 	@FXML
@@ -57,6 +60,7 @@ public class CashierReportController {
 		
 		cashierColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("UserId"));
 		registerColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("RegisterId"));
+		typeColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("Type"));
 		saleIDColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Long>("SaleNumber"));
 		saleDateColumn.setCellValueFactory(new PropertyValueFactory<SaleData, String>("SaleTime"));
 		itemColumn.setCellValueFactory(new PropertyValueFactory<SaleData, Integer>("numItems"));
