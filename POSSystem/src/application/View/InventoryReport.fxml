@@ -20,7 +20,7 @@
                 <TableColumn fx:id="supplierColumn" prefWidth="152.00006103515625" text="SUPPLIER" />
                   <TableColumn fx:id="quantityColumn" prefWidth="155.19998168945312" text="QUANTITY" />
                   <TableColumn fx:id="priceColumn" prefWidth="140.00006103515625" text="PRICE" />
-                  <TableColumn fx:id="pendingColumn" minWidth="0.0" prefWidth="126.39996337890625" text="PENDING" />
+                  <TableColumn fx:id="pendingColumn" minWidth="0.0" prefWidth="126.39996337890625" text="ORDERS" />
                   <TableColumn fx:id="thresholdColumn" maxWidth="117.60003662109375" minWidth="-1.0" prefWidth="96.0" text="THRESHOLD" />
               </columns>
             </TableView>

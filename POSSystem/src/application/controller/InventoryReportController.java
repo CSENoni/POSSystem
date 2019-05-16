@@ -19,7 +19,7 @@ public class InventoryReportController {
 	private TableView<InventoryData> tableData;
 
 	@FXML
-	private TableColumn<InventoryData, Integer> productIdColumn;
+	private TableColumn<InventoryData, Long> productIdColumn;
 
 	@FXML
 	private TableColumn<InventoryData, String> productColumn;

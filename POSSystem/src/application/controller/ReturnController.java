@@ -177,7 +177,6 @@ public class ReturnController {
 			for(InventoryData data : inventoryList) {
 				if(item.getProductId() == data.getProductId() && 
 						item.getProductName().equals(data.getProductName())) {
-					data.setOutstandingOrder(item.getOutstandingOrder() - item.getReturnQuantity());
 					data.setStockQuantity(item.getStockQuantity() + item.getReturnQuantity());
 					InventoryUtils.update(inventoryList.indexOf(data), data);
 				}
@@ -199,7 +198,7 @@ public class ReturnController {
 	
 	public void existReturn(ActionEvent event) {
 		try {
-			POSUtils.changeScene(event, getClass(), "../view/Home.fxml");
+			POSUtils.changeScene(event, getClass(), "../view/ReturnComplete.fxml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

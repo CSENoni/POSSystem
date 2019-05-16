@@ -2,17 +2,19 @@ package application.Model.Inventory;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class InventoryData implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	private int productId;
+	private Long productId;
 	private String productName;
 	private String supplier;
 	private double price;
 	private int stockQuantity; //the number of items in stock at the store
-	private int outstandingOrder; // number of quantity in pending orders
+	private int outstandingOrder = 0; // number of quantity in pending orders
 	private int threshold;
 	private static AtomicInteger id_generator = new AtomicInteger(1); 
 	private int saleQuantity; //number of items in a sale
@@ -23,7 +25,7 @@ public class InventoryData implements Serializable {
 
 	
 	public InventoryData(String productName, String supplier, double price, int quantity, int threshold) {
-		this.productId = id_generator.getAndIncrement();
+		this.productId = genProductID();
 		this.productName = productName;
 		this.price = price;
 		this.supplier = supplier;
@@ -31,7 +33,7 @@ public class InventoryData implements Serializable {
 		this.threshold = threshold;
 	}
 	
-	public int getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 	
@@ -120,5 +122,11 @@ public class InventoryData implements Serializable {
 		return decim.format(this.returnTotal);
 	}
 	
+	public long genProductID() {
+		Date time = new Date();
+		SimpleDateFormat genID = new SimpleDateFormat("yyMMddssMs");
+		String saleID = genID.format(time);
+		return Long.parseLong(saleID);
+	}
 	
 }
